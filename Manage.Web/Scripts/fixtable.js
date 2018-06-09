@@ -69,7 +69,6 @@ function pageClickedEventStoppable() {
             $("#searchForm").submit();
         }
     }
-
     $('#paginator').bootstrapPaginator(options);
 }
 
