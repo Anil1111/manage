@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "配置中心主页";
+    Layout = "~/Views/Shared/_AceLayout.cshtml";
+}
+
+<div class="page-content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-block alert-success">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+                </button>
+                <i class="ace-icon fa fa-check green"></i>
+                欢迎使用
+                <strong class="green">
+                    后台管理系统
+                    <small></small>
+                </strong>
+                ,你本次登陆时间为 @DateTime.Now.ToString("yyyy-MM-dd")，登陆IP:@Manage.Core.Utility.NetUtil.Ip.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="row">
+            </div><!-- /.row -->
+
+            <div class="hr hr32 hr-dotted"></div>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div>
+</div>
+

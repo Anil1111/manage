@@ -1,0 +1,27 @@
+﻿<input id="page" name="page" type="hidden" value="@ViewBag.page.PageIndex" />
+<input id="rows" name="rows" type="hidden" value="@ViewBag.page.PageSize" />
+<input id="pagecount" type="hidden" value="@ViewBag.page.PageCount" />
+
+<div class="row" style="margin-top: 4px;" id="pager">
+    <div class="col-md-4" id="pageSizeList" style="margin-top: 5px;">
+        每页显示
+        <select id="pageSizeSel" onchange="selChange()" style="height: 24px; padding: 0px 4px;">
+            <option @{
+                        if (Convert.ToInt32(ViewBag.page.PageSize) == 20)
+                        {
+                            Write("selected");
+                        }} value="20">20</option>
+            <option @{
+                        if (Convert.ToInt32(ViewBag.page.PageSize) == 50)
+                        {
+                            Write("selected");
+                        }} value="50">50</option>
+        </select>条,
+        第 @ViewBag.page.PageIndex/@ViewBag.page.PageCount
+        页,
+        共 @ViewBag.page.TotalRecord 条记录
+    </div>
+    <div class="col-md-8" style="text-align: right;">
+        <ul id="paginator"></ul>
+    </div>
+</div>

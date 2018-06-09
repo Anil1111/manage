@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ManageDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Sys_Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LinkUrl" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsMenu" Type="bit" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Sys_Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_PermissionRole">
+          <Key>
+            <PropertyRef Name="Permission_Id" />
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="Permission_Id" Type="int" Nullable="false" />
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="OrderSort" Type="int" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_RoleUser">
+          <Key>
+            <PropertyRef Name="Role_Id" />
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="TrueName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="OrderSort" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_UserGroupRole">
+          <Key>
+            <PropertyRef Name="UserGroup_Id" />
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="UserGroup_Id" Type="int" Nullable="false" />
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_UserGroupUser">
+          <Key>
+            <PropertyRef Name="UserGroup_Id" />
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="UserGroup_Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ManageDBModelStoreContainer">
+          <EntitySet Name="Sys_Module" EntityType="Self.Sys_Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_Permission" EntityType="Self.Sys_Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_PermissionRole" EntityType="Self.Sys_PermissionRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_Role" EntityType="Self.Sys_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_RoleUser" EntityType="Self.Sys_RoleUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_User" EntityType="Self.Sys_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_UserGroup" EntityType="Self.Sys_UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_UserGroupRole" EntityType="Self.Sys_UserGroupRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_UserGroupUser" EntityType="Self.Sys_UserGroupUser" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ManageDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Sys_Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Sys_PermissionRole">
+          <Key>
+            <PropertyRef Name="Permission_Id" />
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="Permission_Id" Type="Int32" Nullable="false" />
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="OrderSort" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Sys_RoleUser">
+          <Key>
+            <PropertyRef Name="Role_Id" />
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OrderSort" Type="Int32" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Sys_UserGroupRole">
+          <Key>
+            <PropertyRef Name="UserGroup_Id" />
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="UserGroup_Id" Type="Int32" Nullable="false" />
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_UserGroupUser">
+          <Key>
+            <PropertyRef Name="UserGroup_Id" />
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="UserGroup_Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ManageDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Sys_Permission" EntityType="Self.Sys_Permission" />
+          <EntitySet Name="Sys_PermissionRole" EntityType="Self.Sys_PermissionRole" />
+          <EntitySet Name="Sys_Role" EntityType="Self.Sys_Role" />
+          <EntitySet Name="Sys_RoleUser" EntityType="Self.Sys_RoleUser" />
+          <EntitySet Name="Sys_UserGroup" EntityType="Self.Sys_UserGroup" />
+          <EntitySet Name="Sys_UserGroupRole" EntityType="Self.Sys_UserGroupRole" />
+          <EntitySet Name="Sys_UserGroupUser" EntityType="Self.Sys_UserGroupUser" />
+          <EntitySet Name="Sys_Module" EntityType="ManageDBModel.Sys_Module" />
+          <EntitySet Name="Sys_User" EntityType="ManageDBModel.Sys_User" />
+        </EntityContainer>
+        <EntityType Name="Sys_Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LinkUrl" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsMenu" Type="Boolean" Nullable="false" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Icon" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sys_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TrueName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ManageDBModelStoreContainer" CdmEntityContainer="ManageDBEntities">
+          <EntitySetMapping Name="Sys_Permission">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_Permission">
+              <MappingFragment StoreEntitySet="Sys_Permission">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_PermissionRole">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_PermissionRole">
+              <MappingFragment StoreEntitySet="Sys_PermissionRole">
+                <ScalarProperty Name="Permission_Id" ColumnName="Permission_Id" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_Role">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_Role">
+              <MappingFragment StoreEntitySet="Sys_Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="OrderSort" ColumnName="OrderSort" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_RoleUser">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_RoleUser">
+              <MappingFragment StoreEntitySet="Sys_RoleUser">
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_UserGroup">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_UserGroup">
+              <MappingFragment StoreEntitySet="Sys_UserGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OrderSort" ColumnName="OrderSort" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_UserGroupRole">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_UserGroupRole">
+              <MappingFragment StoreEntitySet="Sys_UserGroupRole">
+                <ScalarProperty Name="UserGroup_Id" ColumnName="UserGroup_Id" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_UserGroupUser">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_UserGroupUser">
+              <MappingFragment StoreEntitySet="Sys_UserGroupUser">
+                <ScalarProperty Name="UserGroup_Id" ColumnName="UserGroup_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_Module">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_Module">
+              <MappingFragment StoreEntitySet="Sys_Module">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IsMenu" ColumnName="IsMenu" />
+                <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_User">
+            <EntityTypeMapping TypeName="ManageDBModel.Sys_User">
+              <MappingFragment StoreEntitySet="Sys_User">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="TrueName" ColumnName="TrueName" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,105 @@
+﻿@RenderPage("~/Views/Shared/_FormHeadLayout.cshtml")
+<div class="modal-content" style="width:100%;height:100%">
+    <form id="signupForm" class="form-horizontal" role="form" action="/Member/User/UserInsert" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+            <div class="row">
+                <input name="Id" type="hidden" value="@ViewBag.form.Id" />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right" for="UserName">账号</label>
+                    <div class="col-sm-5">
+                        <input id="txtUserName" name="UserName" type="text" placeholder="请输入账号" class="col-xs-10 col-sm-5 form-control" value="@ViewBag.form.UserName" maxlength="20">
+                    </div>
+                </div>
+                @if ("ViewBag.type" == "edit")
+                {
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right" for="Password">密码</label>
+                        <div class="col-sm-5">
+                            <input id="txtPassword" name="Password" type="password" placeholder="请输入密码" class="col-xs-10 col-sm-5 form-control" value="@ViewBag.form.Password" maxlength="50">
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right" for="TrueName">用户名称</label>
+                    <div class="col-sm-5">
+                        <input id="txtTrueName" name="TrueName" type="text" placeholder="请输入用户名称" class="col-xs-10 col-sm-5 form-control" value="@ViewBag.form.TrueName" maxlength="20">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right">状态</label>
+                    <div class="radio" id="radioStatus">
+                        <label>
+                            <input name="radio" type="radio" class="ace"
+                                   @if(@ViewBag.form.Enabled == true) { WriteLiteral("checked=\"checked\"");  } else { WriteLiteral("checked=\"checked\""); } value="true">
+                            <span class="lbl">启用</span>
+                        </label>
+                        <label>
+                            <input name="radio" type="radio" class="ace"
+                                   @if(@ViewBag.form.Enabled == false) { WriteLiteral("checked=\"checked\"");  } value="false">
+                            <span class="lbl">停用</span>
+                        </label>
+                    </div>
+                    <input id="Enabled" type="hidden" name="Enabled" value="0" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="position: absolute; bottom: 0; height: 60px; width:100%;">
+            <button class="btn btn-sm btn-info" type="submit">
+                <i class="ace-icon fa fa-check bigger-110"></i>确定
+            </button>
+            <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal" onclick="bDialog.close()">
+                <i class="ace-icon fa fa-times"></i>取消
+            </button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#signupForm").validate({
+            errorElement: 'span',
+            errorClass: 'help-block',
+            rules: {
+                UserName: "required",
+                Password: "required",
+                TrueName: "required"
+            },
+            messages: {
+                UserName: "账号不能为空",
+                Password: "密码不能为空",
+                TrueName: "用户名称不能为空"
+            },
+            errorPlacement: function (error, element) {
+                element.next().remove();
+                element.after('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error has-feedback');
+            },
+            success: function (label) {
+                var el = label.closest('.form-group').find("input");
+                el.next().remove();
+                el.after('<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>');
+                label.closest('.form-group').removeClass('has-error').addClass("has-feedback has-success");
+                label.remove();
+            },
+            submitHandler: function (form) {
+                var selected = $('#radioStatus input:radio:checked').val();
+                $("#Enabled").val(selected);
+                if ("@ViewBag.type" == "edit") {
+                    $("#signupForm").attr("action", "/Member/User/UserEdit");
+                }
+                $('#signupForm').ajaxSubmit({
+                    success: function (responseText) {
+                        var d = eval(JSON.parse(responseText));
+                        if (d.state == 0) {
+                            bDialog.close({ state: 0 });
+                        } else {
+                            bDialog.alert(d.message, null, { messageType: 'error' });
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

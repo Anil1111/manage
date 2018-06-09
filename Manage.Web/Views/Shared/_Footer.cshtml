@@ -1,0 +1,81 @@
+﻿<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+        </div>
+    </div><!-- /.main-content -->
+<script type="text/javascript">
+    $(function () {
+        var homeIndex = "@ViewBag.index";
+        if (!isNull(homeIndex)) {
+            $(".first").addClass("active");
+            localStorage.setItem("fitstMenuName", "");
+            localStorage.setItem("fitstMenuChildName", "");
+        }
+
+        $(".nav-list .fitstMenu").each(function (index) {
+            var text = $(this).attr("text");
+            var selectText = localStorage.getItem("fitstMenuName");
+
+            if (text == selectText) {
+                if (text == "后台管理中心") {
+                    $(this).addClass("active");
+                    localStorage.setItem("fitstMenuChildName", "");
+                } else {
+                    $(".first").removeClass("active");
+                    $(this).addClass("active open");
+                    $("#breadcrumb").append("<li class=\"active\">" + selectText + "</li>");
+                }
+            }
+        });
+
+        $(".fitstMenu .fitstMenuChild").each(function (index) {
+            var text = $(this).attr("text");
+            var selectText = localStorage.getItem("fitstMenuChildName");
+            if (text == selectText) {
+                var url = $(this).find('a').attr("href");
+                $(this).addClass("active");
+                $("#breadcrumb").append("<li class=\"active\"><a href=\"" + url + "\"> " + selectText + " </a></li>");
+            }
+        });
+    });
+
+    function fitstMenuClick(obj) {
+        var text = $(obj).attr("text");
+        localStorage.setItem("fitstMenuName", text);
+    }
+
+    function fitstMenuChildClick(obj) {
+        var text = $(obj).attr("text");
+        localStorage.setItem("fitstMenuChildName", text);
+    }
+
+    function goIndex() {
+        localStorage.clear();
+        window.location.href = "/Home/Index";
+    }
+
+    function logOut() {
+        bDialog.alert('确认退出吗？', function (data) {
+            window.location.href = "/Login/LogOut";
+        }, {
+                messageType: 'confirm',
+                cancel: function (dlg) { }
+            });
+    }
+
+    function updatePwd() {
+        bDialog.open({
+            title: "修改密码",
+            width: 800,
+            height: 300,
+            url: '@Url.Action("UpdatePwd", "Home", new { area = "Common" })',
+            params: {},
+            callback: function (data) {
+                if (data && data.results && data.results.length > 0) {
+                    window.location.href = "@Url.Action("Index", "Login", new { area = "Common" })";
+                }
+            }
+        });
+    }
+</script>

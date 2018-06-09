@@ -1,0 +1,120 @@
+﻿@RenderPage("~/Views/Shared/_FormHeadLayout.cshtml")
+<div class="modal-content" style="width:100%;height:100%">
+    <form id="signupForm" class="form-horizontal" role="form" action="/Member/Permission/PermissionInsert" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+            <div class="row">
+                <input name="Id" type="hidden" value="@ViewBag.form.Id" />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right" for="Name">权限名称</label>
+                    <div class="col-sm-5">
+                        <input id="txtName" name="Name" type="text" placeholder="请输入权限名称" class="col-xs-10 col-sm-5 form-control" value="@ViewBag.form.Name" maxlength="20">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right" for="form-field-1">所属模块</label>
+                    <div class="col-sm-5" style="margin-top: 8px;">
+                        <select class="col-xs-10 col-sm-5 form-control" id="ModuleId" name="ModuleId">
+                            @foreach (Manage.Data.Sys_Module item in (ViewData["ModuleList"] as IEnumerable<Manage.Data.Sys_Module>))
+                            {
+                                if (ViewBag.form.ModuleId == item.Id)
+                                {
+                                    <option value="@item.Id" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right" for="Code">权限编码</label>
+                    <div class="col-sm-5">
+                        <input id="txtCode" name="Code" type="text" placeholder="请输入权限编码" class="col-xs-10 col-sm-5 form-control" value="@ViewBag.form.Code" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right" for="Description">描述</label>
+                    <div class="col-sm-5">
+                        <input id="txtDescription" name="Description" type="text" placeholder="请输入描述" class="col-xs-10 col-sm-5 form-control" value="@ViewBag.form.Description" maxlength="10">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right">状态</label>
+                    <div class="radio" id="radioStatus">
+                        <label>
+                            <input name="radio" type="radio" class="ace"
+                                   @if(@ViewBag.form.Enabled == true) { WriteLiteral("checked=\"checked\"");  } else { WriteLiteral("checked=\"checked\""); } value="true">
+                            <span class="lbl">启用</span>
+                        </label>
+                        <label>
+                            <input name="radio" type="radio" class="ace"
+                                   @if(@ViewBag.form.Enabled == false) { WriteLiteral("checked=\"checked\"");  } value="false">
+                            <span class="lbl">停用</span>
+                        </label>
+                    </div>
+                    <input id="Enabled" type="hidden" name="Enabled" value="0" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="position: absolute; bottom: 0; height: 60px; width:100%;">
+            <button class="btn btn-sm btn-info" type="submit">
+                <i class="ace-icon fa fa-check bigger-110"></i>确定
+            </button>
+            <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal" onclick="bDialog.close()">
+                <i class="ace-icon fa fa-times"></i>取消
+            </button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#signupForm").validate({
+            errorElement: 'span',
+            errorClass: 'help-block',
+            rules: {
+                Name: "required",
+                Code: "required",
+                Description: "required"
+            },
+            messages: {
+                Name: "权限名称不能为空",
+                Code: "权限编码不能为空",
+                Description: "描述不能为空"
+            },
+            errorPlacement: function (error, element) {
+                element.next().remove();
+                element.after('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error has-feedback');
+            },
+            success: function (label) {
+                var el = label.closest('.form-group').find("input");
+                el.next().remove();
+                el.after('<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>');
+                label.closest('.form-group').removeClass('has-error').addClass("has-feedback has-success");
+                label.remove();
+            },
+            submitHandler: function (form) {
+                var selected = $('#radioStatus input:radio:checked').val();
+                $("#Enabled").val(selected);
+                if ("@ViewBag.type" == "edit") {
+                    $("#signupForm").attr("action", "/Member/Permission/PermissionEdit");
+                }
+                $('#signupForm').ajaxSubmit({
+                    success: function (responseText) {
+                        var d = eval(JSON.parse(responseText));
+                        if (d.state == 0) {
+                            bDialog.close({ state: 0 });
+                        } else {
+                            bDialog.alert(d.message, null, { messageType: 'error' });
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

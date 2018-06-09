@@ -1,0 +1,10 @@
+﻿@RenderPage("~/Views/Shared/_HeadLayout.cshtml")
+<body class="no-skin">
+    @RenderPage("~/Views/Shared/_AceMainContainer.cshtml")
+
+    @RenderBody()
+    @RenderSection("scripts", false)
+
+    @RenderPage("~/Views/Shared/_Footer.cshtml")
+</body>
+</html>

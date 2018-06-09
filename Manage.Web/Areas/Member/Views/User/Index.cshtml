@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AceLayout.cshtml";
+}
+@using Manage.Data;
+<div class="page-content">
+    <div class="page-header" id="searchDiv" style="padding-bottom: 0px;">
+        <form id="searchForm" action="@Url.Action("Index", "User")" method="post">
+            <table width="100%">
+                <tr>
+                    <td align="center" width="5%">账号</td>
+                    <td width="5%">
+                        <input id="txtUserName" name="UserName" type="text" class="input-sm" placeholder="请输入账号" value="@ViewBag.form.UserName" maxlength="10"/>
+                    </td>
+                    <td align="center" width="5%">更新时间</td>
+                    <td width="10%">
+                        <div class="input-daterange input-group">
+                            <input id="beginDate" name="BeginDate" type="text" class="input-sm" placeholder="请输入开始日期" value="@ViewBag.form.BeginDate" style="padding: 0px 0px;height: 25px;width: 100px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd'})" readonly="readonly" />
+                            <span class="input-group-addon" style="width:0px">
+                                <i class="fa fa-exchange"></i>
+                            </span>
+                            <input id="endDate" name="EndDate" type="text" class="input-sm" placeholder="请输入结束日期" value="@ViewBag.form.EndDate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd'})" readonly="readonly" style="padding: 0px 0px;height: 25px;width: 100px;" />
+                        </div>
+                    </td>
+                    <td align="right">
+                        <button class="btn btn-info btn-sm" type="button" onclick="doSearch()">
+                            <i class="ace-icon fa fa-check"></i>搜索
+                        </button>
+                        <button class="btn btn-sm" type="button" onclick="clearForm('searchForm')">
+                            <i class="ace-icon fa fa-undo"></i>重置
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="Id" value="" clear="false" id="Id" />
+            @RenderPage("~/Views/Shared/_PageLayout.cshtml")
+        </form>
+    </div>
+    <div class="page-header">
+        <div class="hidden-sm hidden-xs action-buttons">
+            <i class="ace-icon fa fa-plus-circle bigger-130 purple"></i>
+            <a href="#" title="新增" onclick="bDialogOpen('新增用户', '@Url.Action("UserInsert", "User")')">新增</a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-left: 2px;margin-right: -3px;">
+        <div id="grid" class="grid_8 height250">
+            <table class="table table-bordered table-hover" id="fixTable" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="center">序号</th>
+                        <th class="center">账号</th>
+                        <th class="center">用户名称</th>
+                        <th class="center">更新时间</th>
+                        <th class="center">是否激活</th>
+                        <th class="center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 0;}
+                    @foreach (var item in (List<Sys_User>)ViewBag.page.ResultList)
+                    {
+                        i += 1;
+                        <tr class="">
+                            <td class="center">@i</td>
+                            <td class="center">@Html.DisplayFor(modelItem => item.UserName)</td>
+                            <td class="center">@Html.DisplayFor(modelItem => item.TrueName)</td>
+                            <td class="center">@string.Format("{0:yyyy-MM-dd hh:mm:ss}", item.UpdateDate)</td>
+                            <td class="center">
+                                @if (item.Enabled == true)
+                                {
+                                    <span class="label label-sm label-success" style="height: 15px;">是</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning" style="height: 15px;">否</span>
+                                }
+                            </td>
+                            <td class="center" width="15%">
+                                <div class="hidden-sm hidden-xs action-buttons">
+                                    <a class="green" href="#" title="编辑" onclick="bDialogOpen('编辑用户','@Url.Action("UserEdit", "User", new { Id = @item.Id })')">
+                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                    </a>
+                                    <a class="red" href="#" title="删除" onclick="doDel('@item.Id', event)">
+                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                    </a>
+                                    <a class="blue" href="#" title="设置用户组" onclick="bDialogSetGroupUser('设置用户组','@Url.Action("UserSetGroupUser", "User", new { Id = @item.Id })')">
+                                        <i class="ace-icon glyphicon glyphicon-user bigger-130"></i>
+                                    </a>
+                                    <a class="blue" href="#" title="设置角色" onclick="bDialogSetGroupUser('设置角色','@Url.Action("UserSetRolesUser", "User", new { Id = @item.Id })')">
+                                        <i class="ace-icon fa fa-cog bigger-130"></i>
+                                    </a>
+                                    <a class="red" href="#" title="重置密码" onclick="userResetPwd('@item.Id', event)">
+                                        <i class="ace-icon fa fa-cog bigger-130"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @RenderPage("~/Views/Shared/_PagerLayout.cshtml")
+    </div>
+    <script src="~/Scripts/fixtable.js"></script>
+</div>
+<script type="text/javascript">
+    var formId = "searchForm";
+    function doSearch() {
+        resetSearch();
+        $("#" + formId).attr("action", "@Url.Action("Index", "User")");
+        $("#" + formId).submit();
+    }
+
+    function bDialogOpen(title, url) {
+        bDialog.open({
+            title: title,
+            width: 800,
+            height: 400,
+            url: url,
+            params: {},
+            callback: function (data) {
+                if (data && data.results && data.results.length > 0) {
+                    doSearch();
+                }
+            }
+        });
+    }
+
+    function doDel(id, event) {
+        event.stopPropagation();
+        bDialog.alert('您确定要删除吗？', function (data) {
+            $("#Id").val(id);
+            $("#" + formId).attr("action", "@Url.Action("UserDelete", "User")");
+            $("#" + formId).ajaxSubmit({
+                success: function (responseText) {
+                    var d = eval(JSON.parse(responseText));
+                    if (d.state == 0) {
+                        doSearch();
+                    } else {
+                        bDialog.alert(d.message, null, { messageType: 'error' });
+                    }
+                }
+            });
+        }, {
+                messageType: 'confirm',
+                cancel: function (dlg) { }
+            });
+    }
+
+    function bDialogSetGroupUser(title, url) {
+        bDialog.open({
+            title: title,
+            width: 800,
+            height: 400,
+            url: url,
+            params: {},
+            callback: function (data) {
+                if (data && data.results && data.results.length > 0) {}
+            }
+        });
+    }
+
+    function userResetPwd(id, event) {
+        event.stopPropagation();
+        bDialog.alert('您确定要重置密码为 123456 吗？', function (data) {
+            $("#Id").val(id);
+            $("#" + formId).attr("action", "@Url.Action("UserResetPwd", "User")");
+            $("#" + formId).ajaxSubmit({
+                success: function (responseText) {
+                    var d = eval(JSON.parse(responseText));
+                    if (d.state == 0) {
+                        doSearch();
+                    } else {
+                        bDialog.alert(d.message, null, { messageType: 'error' });
+                    }
+                }
+            });
+        }, {
+                messageType: 'confirm',
+                cancel: function (dlg) { }
+            });
+    }
+</script>

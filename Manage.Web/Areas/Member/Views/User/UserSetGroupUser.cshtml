@@ -1,0 +1,69 @@
+﻿@RenderPage("~/Views/Shared/_FormHeadLayout.cshtml")
+<div class="modal-content" style="width:100%;height:100%">
+    <form id="signupForm" class="form-horizontal" role="form" action="/Member/User/UserSetGroupUser" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-12">
+
+                        <input id="json" type="hidden" name="json" value="" />
+                        <input id="userId" type="hidden" name="userId" value="" />
+                        <div class="profile-user-info profile-user-info-striped" id="checkbox">
+
+                                <div class="profile-info-row">
+                                    <div class="profile-info-value">
+                                        <div class="control-group">
+                                            <div class="checkbox">
+                                            @foreach (Manage.Data.Sys_UserGroup item in (ViewData["GroupList"] as IEnumerable<Manage.Data.Sys_UserGroup>))
+                                             {
+                                                <label>
+                                                    <input name="form-field-checkbox" type="checkbox" class="ace"
+                                                        UserGroup_Id="@item.Id" User_Id="@ViewBag.User_Id"
+                                                           @if (item.Check == true) { WriteLiteral("checked"); }/>
+                                                    <span class="lbl"> @item.GroupName</span>
+                                                </label>
+                                             }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="position: absolute; bottom: 0; height: 60px; width:100%;">
+            <button class="btn btn-sm btn-info" type="button" onclick="doSave()">
+                <i class="ace-icon fa fa-check bigger-110"></i>确定
+            </button>
+            <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal" onclick="bDialog.close()">
+                <i class="ace-icon fa fa-times"></i>取消
+            </button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function doSave() {
+        var dMap = [];
+        $("#checkbox input:checkbox:checked").each(function () {
+            var map = {};
+            map["UserGroup_Id"] = $(this).attr("UserGroup_Id");
+            map["User_Id"] = $(this).attr("User_Id");
+            dMap.push(map);
+        });
+        $("#json").val(JSON.stringify(dMap));
+        $("#userId").val("@ViewBag.User_Id");
+        //alert(JSON.stringify(dMap));
+
+        $('#signupForm').ajaxSubmit({
+            success: function (responseText) {
+                var d = eval(JSON.parse(responseText));
+                if (d.state == 0) {
+                    bDialog.close({ state: 0 });
+                } else {
+                    bDialog.alert(d.message, null, { messageType: 'error' });
+                }
+            }
+        });
+    }
+</script>
