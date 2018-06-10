@@ -114,11 +114,13 @@
     <Compile Include="Data\ReturnResult.cs" />
     <Compile Include="Data\SuperConstants.cs" />
     <Compile Include="Data\UserSession.cs" />
+    <Compile Include="Extend\Ext.Convert.cs" />
+    <Compile Include="Extend\Ext.DateTime.cs" />
+    <Compile Include="Extend\ExtLinq.cs" />
     <Compile Include="Infrastructure\AppDomainTypeFinder.cs" />
     <Compile Include="Infrastructure\IDependencyRegister.cs" />
     <Compile Include="Infrastructure\ITypeFinder.cs" />
-    <Compile Include="Infrastructure\Lambda\ParameterRebinder.cs" />
-    <Compile Include="Infrastructure\Lambda\PredicateBuilder.cs" />
+    <Compile Include="Extend\ParameterRebinder.cs" />
     <Compile Include="Infrastructure\ResponseJson.cs" />
     <Compile Include="Infrastructure\ServiceContainer.cs" />
     <Compile Include="Logging\ILogger.cs" />
@@ -130,9 +132,7 @@
     <Compile Include="Utility\AsposeExcelUtil.cs" />
     <Compile Include="Utility\CheckCodeUtil.cs" />
     <Compile Include="Utility\ConfigUtil.cs" />
-    <Compile Include="Utility\ConvertUtil.cs" />
     <Compile Include="Utility\CookiesUtil.cs" />
-    <Compile Include="Utility\DateUtil.cs" />
     <Compile Include="Utility\EnumUtil.cs" />
     <Compile Include="Utility\FileUtil.cs" />
     <Compile Include="Utility\FtpUtil.cs" />
@@ -144,7 +144,7 @@
     <Compile Include="Utility\QrCodeUtil.cs" />
     <Compile Include="Utility\Security\DESUtil.cs" />
     <Compile Include="Utility\Security\Md5Util.cs" />
-    <Compile Include="Utility\StringUtil.cs" />
+    <Compile Include="Utility\CommonUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

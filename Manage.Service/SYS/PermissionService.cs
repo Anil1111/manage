@@ -1,14 +1,12 @@
 ﻿using Manage.Core.Data;
-using Manage.Core.Infrastructure.Lambda;
+using Manage.Core.Extend;
 using Manage.Core.Pageing;
-using Manage.Core.Utility;
 using Manage.Data;
 using Manage.Data.Data;
 using Manage.Data.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Transactions;
@@ -29,7 +27,7 @@ namespace Manage.Service
 
         public Page<Sys_Permission> FindPage(PermissionVM form)
         {
-            Expression<Func<Sys_Permission, bool>> predicate = PredicateBuilder.True<Sys_Permission>();
+            Expression<Func<Sys_Permission, bool>> predicate = ExtLinq.True<Sys_Permission>();
             if (!string.IsNullOrEmpty(form.Name))
             {
                 predicate = predicate.And(s => s.Name.Contains(form.Name));
@@ -102,7 +100,7 @@ namespace Manage.Service
         public int Insert(PermissionVM form)
         {
             Sys_Permission module = new Sys_Permission();
-            ConvertUtil.CopyFrom(module, form);
+            Ext.CopyFrom(module, form);
             module.UpdateDate = DateTime.Now;
 
             return this._permissionRepository.Insert(ContextDB.managerDBContext, module);

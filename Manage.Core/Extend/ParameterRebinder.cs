@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Manage.Core.Infrastructure.Lambda
+namespace Manage.Core.Extend
 {
     public class ParameterRebinder : ExpressionVisitor
     {

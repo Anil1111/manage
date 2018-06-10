@@ -17,7 +17,7 @@ namespace Manage.WcfService.Services
             log.Info("上传文件开始：" + DateTime.Now);
             byte[] bytes = Convert.FromBase64String(fileInfo.SendByteStr);
 
-            string fileName = StringUtil.GUID() + fileInfo.Extension;
+            string fileName = CommonUtil.GUID() + fileInfo.Extension;
 
             //log.Info("newbytes：" + newbytes);
             log.Info("图片名字：" + fileName);

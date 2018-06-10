@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Manage.Core.Utility
 {
-    public class StringUtil
+    public class CommonUtil
     {
         #region 得到唯一值
         public static string GUID()
@@ -34,26 +34,6 @@ namespace Manage.Core.Utility
         public static string GetPadLeftStr(string str, char paddingChar, int totalWidth)
         {
             return str.PadLeft(totalWidth, paddingChar);
-        }
-
-        /// <summary>
-        /// 转换为16进制
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <returns></returns>
-        public static string ToHexString(byte[] bytes)
-        {
-            string hexString = string.Empty;
-            if (bytes != null)
-            {
-                StringBuilder strB = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    strB.Append(bytes[i].ToString("X2"));
-                }
-                hexString = strB.ToString();
-            }
-            return hexString;
         }
 
         /// <summary>

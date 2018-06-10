@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Manage.Core.Infrastructure.Lambda
+namespace Manage.Core.Extend
 {
-    public static class PredicateBuilder
+    public static partial class ExtLinq
     {
         public static Expression<Func<T, bool>> True<T>() { return f => true; }
         public static Expression<Func<T, bool>> False<T>() { return f => false; }

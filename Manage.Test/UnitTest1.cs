@@ -12,7 +12,7 @@ namespace Manage.Test
         [TestMethod]
         public void TestMethod1()
         {
-            string path = StringUtil.PinYin("贾海洋");
+            string path = CommonUtil.PinYin("贾海洋");
         }
     }
 }

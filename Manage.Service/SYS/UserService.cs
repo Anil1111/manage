@@ -1,6 +1,6 @@
 ﻿using Manage.Core.Caching;
 using Manage.Core.Data;
-using Manage.Core.Infrastructure.Lambda;
+using Manage.Core.Extend;
 using Manage.Core.Pageing;
 using Manage.Core.Utility;
 using Manage.Data;
@@ -29,19 +29,19 @@ namespace Manage.Service
 
         public Page<Sys_User> FindPage(UserVM form)
         {
-            Expression<Func<Sys_User, bool>> predicate = PredicateBuilder.True<Sys_User>();
+            Expression<Func<Sys_User, bool>> predicate = ExtLinq.True<Sys_User>();
             if (!string.IsNullOrEmpty(form.UserName))
             {
                 predicate = predicate.And(s => s.UserName.Contains(form.UserName));
             }
             if (!string.IsNullOrEmpty(form.BeginDate))
             {
-                DateTime dt = ConvertUtil.ToDate(form.BeginDate);
+                DateTime dt = Ext.ToDate(form.BeginDate);
                 predicate = predicate.And(s => s.UpdateDate >= dt);
             }
             if (!string.IsNullOrEmpty(form.EndDate))
             {
-                DateTime dt = ConvertUtil.ToDate(form.EndDate);
+                DateTime dt = Ext.ToDate(form.EndDate);
                 predicate = predicate.And(s => s.UpdateDate <= dt);
             }
 
@@ -80,7 +80,7 @@ namespace Manage.Service
             //int ret = (int)parameters[1].Value;
 
             Sys_User model = new Sys_User();
-            ConvertUtil.CopyFrom(model, form);
+            Ext.CopyFrom(model, form);
             model.UpdateDate = DateTime.Now;
             model.Password = Md5Util.MD5Encrypt(model.Password);
 
@@ -163,7 +163,7 @@ namespace Manage.Service
             }
             else
             {
-                string code = ConvertUtil.ToString(HttpContext.Current.Session[SuperConstants.LOGIN_VALIDATE_CODE]);
+                string code = Ext.ToString(HttpContext.Current.Session[SuperConstants.LOGIN_VALIDATE_CODE]);
                 if (!code.ToLower().Equals(form.CheckCode.ToLower()))
                 {
                     throw new BaseException(SuperConstants.AJAX_RETURN_STATE_ERROR, "验证码错误");
@@ -180,7 +180,7 @@ namespace Manage.Service
                 {
                     UserId = user.Id,
                     UserName = user.UserName,
-                    TokenId = StringUtil.GUID()
+                    TokenId = CommonUtil.GUID()
                 };
                 CookiesUtil.SetCookies("username", us.UserName);
                 CookiesUtil.SetCookies(SuperConstants.COOKIESID, us.TokenId);

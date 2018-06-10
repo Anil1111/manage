@@ -1,7 +1,6 @@
 ﻿using Manage.Core.Data;
-using Manage.Core.Infrastructure.Lambda;
+using Manage.Core.Extend;
 using Manage.Core.Pageing;
-using Manage.Core.Utility;
 using Manage.Data;
 using Manage.Data.Data;
 using Manage.Data.Domain;
@@ -21,7 +20,7 @@ namespace Manage.Service
 
         public Page<Sys_UserGroup> FindPage(UserGroupVM form)
         {
-            Expression<Func<Sys_UserGroup, bool>> predicate = PredicateBuilder.True<Sys_UserGroup>();
+            Expression<Func<Sys_UserGroup, bool>> predicate = ExtLinq.True<Sys_UserGroup>();
             OrderModelField idOrder = new OrderModelField
             {
                 PropertyName = "Id",
@@ -54,7 +53,7 @@ namespace Manage.Service
         public int Insert(UserGroupVM form)
         {
             Sys_UserGroup model = new Sys_UserGroup();
-            ConvertUtil.CopyFrom(model, form);
+            Ext.CopyFrom(model, form);
             model.UpdateDate = DateTime.Now;
 
             return this._userGroupRepository.Insert(ContextDB.managerDBContext, model);

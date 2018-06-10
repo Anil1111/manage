@@ -1,7 +1,6 @@
 ﻿using Manage.Core.Data;
-using Manage.Core.Infrastructure.Lambda;
+using Manage.Core.Extend;
 using Manage.Core.Pageing;
-using Manage.Core.Utility;
 using Manage.Data;
 using Manage.Data.Data;
 using Manage.Data.Domain;
@@ -35,7 +34,7 @@ namespace Manage.Service
 
         public Page<Sys_Module> FindPage(ModuleVM form)
         {
-            Expression<Func<Sys_Module, bool>> predicate = PredicateBuilder.True<Sys_Module>();
+            Expression<Func<Sys_Module, bool>> predicate = ExtLinq.True<Sys_Module>();
             if (!string.IsNullOrEmpty(form.Name))
             {
                 predicate = predicate.And(s => s.Name.Contains(form.Name));
@@ -110,7 +109,7 @@ namespace Manage.Service
             }
 
             Sys_Module module = new Sys_Module();
-            ConvertUtil.CopyFrom(module, form);
+            Ext.CopyFrom(module, form);
             module.IsMenu = true;
             module.UpdateDate = DateTime.Now;
 

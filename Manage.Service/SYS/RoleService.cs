@@ -1,7 +1,6 @@
 ﻿using Manage.Core.Data;
-using Manage.Core.Infrastructure.Lambda;
+using Manage.Core.Extend;
 using Manage.Core.Pageing;
-using Manage.Core.Utility;
 using Manage.Data;
 using Manage.Data.Data;
 using Manage.Data.Domain;
@@ -66,7 +65,7 @@ namespace Manage.Service
 
         public Page<Sys_Role> FindPage(UserRoleVM form)
         {
-            Expression<Func<Sys_Role, bool>> predicate = PredicateBuilder.True<Sys_Role>();
+            Expression<Func<Sys_Role, bool>> predicate = ExtLinq.True<Sys_Role>();
             OrderModelField idOrder = new OrderModelField
             {
                 PropertyName = "Id",
@@ -109,7 +108,7 @@ namespace Manage.Service
         public int Insert(UserRoleVM form)
         {
             Sys_Role model = new Sys_Role();
-            ConvertUtil.CopyFrom(model, form);
+            Ext.CopyFrom(model, form);
             model.UpdateDate = DateTime.Now;
 
             return this._roleRepository.Insert(ContextDB.managerDBContext, model);
