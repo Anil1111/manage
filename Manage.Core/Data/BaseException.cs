@@ -25,12 +25,12 @@ namespace Manage.Core.Data
             this.exceptionFlag = exceptionFlag;
         }
 
-        public string GetMsg()
+        public string GetMessage()
         {
             return this.message;
         }
 
-        public void SetMsg(string msg)
+        public void SetMessage(string msg)
         {
             this.message = msg;
         }

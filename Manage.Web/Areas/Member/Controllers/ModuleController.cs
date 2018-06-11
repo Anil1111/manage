@@ -70,8 +70,8 @@ namespace Manage.Web.Areas.Member.Controllers
             }
             catch (BaseException ex)
             {
-                _logger.Info(ex.GetMsg());
-                return ResponseJson.Error(ex.GetExceptionFlag(), ex.GetMsg());
+                _logger.Info(ex.GetMessage());
+                return ResponseJson.Error(ex.GetExceptionFlag(), ex.GetMessage());
             }
             catch (Exception ex)
             {
@@ -109,8 +109,8 @@ namespace Manage.Web.Areas.Member.Controllers
             }
             catch (BaseException ex)
             {
-                _logger.Info(ex.GetMsg());
-                return ResponseJson.Error(ex.GetExceptionFlag(), ex.GetMsg());
+                _logger.Info(ex.GetMessage());
+                return ResponseJson.Error(ex.GetExceptionFlag(), ex.GetMessage());
             }
             catch (Exception ex)
             {
@@ -129,8 +129,8 @@ namespace Manage.Web.Areas.Member.Controllers
             }
             catch (BaseException ex)
             {
-                _logger.Info(ex.GetMsg());
-                return ResponseJson.Error(ex.GetExceptionFlag(), ex.GetMsg());
+                _logger.Info(ex.GetMessage());
+                return ResponseJson.Error(ex.GetExceptionFlag(), ex.GetMessage());
             }
             catch (Exception ex)
             {
