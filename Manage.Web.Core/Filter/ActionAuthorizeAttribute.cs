@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace Manage.Web.Core.Security
+namespace Manage.Web.Core.Filter
 {
     public class ActionAuthorizeAttribute : AuthorizeAttribute
     {

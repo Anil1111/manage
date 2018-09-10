@@ -69,7 +69,7 @@
     <Compile Include="Infrastructure\WebTypeFinder.cs" />
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\ActionAuthorizeAttribute.cs" />
+    <Compile Include="Filter\ActionAuthorizeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Manage.Core\Manage.Core.csproj">
