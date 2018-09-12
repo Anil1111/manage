@@ -12,6 +12,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using Manage.Core.Encrypt;
 
 namespace Manage.Service
 {
@@ -82,7 +83,7 @@ namespace Manage.Service
             Sys_User model = new Sys_User();
             Ext.CopyFrom(model, form);
             model.UpdateDate = DateTime.Now;
-            model.Password = Md5Util.MD5Encrypt(model.Password);
+            model.Password = MD5Encrypt.Encrypt(model.Password);
 
             return this._userRepository.Insert(ContextDB.managerDBContext, model);
         }
@@ -169,7 +170,7 @@ namespace Manage.Service
                     throw new BaseException(SuperConstants.AJAX_RETURN_STATE_ERROR, "验证码错误");
                 }
 
-                form.Password = Md5Util.MD5Encrypt(form.Password);
+                form.Password = MD5Encrypt.Encrypt(form.Password);
                 Sys_User user = this._userRepository.Entity(ContextDB.managerDBContext, t => t.UserName == form.UserName && t.Password == form.Password);
                 if (user == null)
                 {
@@ -263,7 +264,7 @@ namespace Manage.Service
             Sys_User model = this._userRepository.Entity(ContextDB.managerDBContext, t => t.Id == form.Id);
             if (model != null)
             {
-                model.Password = Md5Util.MD5Encrypt("123456");
+                model.Password = MD5Encrypt.Encrypt("123456");
             }
 
             return this._userRepository.Update(ContextDB.managerDBContext, model);
@@ -273,11 +274,11 @@ namespace Manage.Service
         {
             Sys_User user = this._userRepository.Entity(ContextDB.managerDBContext, m => m.Id == userId);
 
-            if (user.Password != Md5Util.MD5Encrypt(oldPassword))
+            if (user.Password != MD5Encrypt.Encrypt(oldPassword))
                 throw new BaseException(SuperConstants.AJAX_RETURN_STATE_ERROR, "原始密码错误");
             else
             {
-                user.Password = Md5Util.MD5Encrypt(oldPassword);
+                user.Password = MD5Encrypt.Encrypt(oldPassword);
                 return this._userRepository.Update(ContextDB.managerDBContext, user);
             }
         }

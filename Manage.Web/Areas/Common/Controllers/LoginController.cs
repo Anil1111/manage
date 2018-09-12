@@ -1,9 +1,12 @@
 ﻿using Manage.Core.Caching;
 using Manage.Core.Data;
+using Manage.Core.Encrypt;
+using Manage.Core.Extend;
 using Manage.Core.Infrastructure;
 using Manage.Core.Utility;
 using Manage.Data.Domain;
 using Manage.Service;
+using Manage.Web.Core.Enums;
 using Manage.Web.Core.Mvc;
 using System;
 using System.Web.Mvc;
@@ -28,6 +31,10 @@ namespace Manage.Web.Areas.Common.Controllers
         // GET: Common/Login
         public ActionResult Index()
         {
+            //string remark = EnumExtension.GetRemark(UserState.Normal);
+            //string desEn = DesEncrypt.Encrypt("王殃殃", "learun###***");
+            //string desDe = DesEncrypt.Decrypt(desEn, "learun###***");
+
             return View();
         }
 

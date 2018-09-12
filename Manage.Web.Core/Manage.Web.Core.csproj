@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\UserState.cs" />
     <Compile Include="Infrastructure\BaseExtensions.cs" />
     <Compile Include="Infrastructure\WebTypeFinder.cs" />
     <Compile Include="Mvc\BaseController.cs" />
