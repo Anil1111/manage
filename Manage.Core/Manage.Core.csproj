@@ -119,7 +119,7 @@
     <Compile Include="Extend\Ext.Enum.cs" />
     <Compile Include="Extend\Ext.Convert.cs" />
     <Compile Include="Extend\Ext.DateTime.cs" />
-    <Compile Include="Extend\ExtLinq.cs" />
+    <Compile Include="Extend\Ext.Linq.cs" />
     <Compile Include="Infrastructure\AppDomainTypeFinder.cs" />
     <Compile Include="Infrastructure\IDependencyRegister.cs" />
     <Compile Include="Infrastructure\ITypeFinder.cs" />
@@ -146,6 +146,7 @@
     <Compile Include="Utility\NetUtil.cs" />
     <Compile Include="Utility\QrCodeUtil.cs" />
     <Compile Include="Utility\CommonUtil.cs" />
+    <Compile Include="Utility\RandomUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

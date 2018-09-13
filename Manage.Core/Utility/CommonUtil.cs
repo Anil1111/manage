@@ -7,21 +7,10 @@ namespace Manage.Core.Utility
 {
     public class CommonUtil
     {
-        #region 得到唯一值
         public static string GUID()
         {
             return Guid.NewGuid().ToString();
         }
-
-        public static string GetRandomName()
-        {
-            Random rd = new Random();
-            StringBuilder sb = new StringBuilder();
-            sb.Append(DateTime.Now.ToString("yyyyMMddHHmmssff"));
-            sb.Append(rd.Next(0, 999999).ToString());
-            return sb.ToString();
-        }
-        #endregion
 
         /// <summary>
         /// 在字符串左边用 paddingChar 补足 totalWidth 长度
@@ -34,23 +23,6 @@ namespace Manage.Core.Utility
         public static string GetPadLeftStr(string str, char paddingChar, int totalWidth)
         {
             return str.PadLeft(totalWidth, paddingChar);
-        }
-
-        /// <summary>
-        /// 得到N位随机数
-        /// </summary>
-        /// <param name="N"></param>
-        /// <returns></returns>
-        public static string RandCode(int N)
-        {
-            char[] arrChar = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-            StringBuilder num = new StringBuilder();
-            Random rnd = new Random(Guid.NewGuid().GetHashCode());
-            for (int i = 0; i < N; i++)
-            {
-                num.Append(arrChar[rnd.Next(0, arrChar.Length)].ToString());
-            }
-            return num.ToString();
         }
 
         /// <summary>
