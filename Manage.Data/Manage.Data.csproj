@@ -119,8 +119,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ManagerDBContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Message.cs">
+      <DependentUpon>SMSDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryRgister.cs" />
+    <Compile Include="SMSDBContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMSDBContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SMSDBContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMSDBContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SMSDBContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SMSDBContext.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Sys_Module.cs">
       <DependentUpon>ManagerDBContext.tt</DependentUpon>
     </Compile>
@@ -159,6 +177,13 @@
       <DependentUpon>ManagerDBContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="SMSDBContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SMSDBContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SMSDBContext.edmx.diagram">
+      <DependentUpon>SMSDBContext.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Manage.Core\Manage.Core.csproj">
@@ -176,6 +201,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ManagerDBContext.edmx</DependentUpon>
       <LastGenOutput>ManagerDBContext.cs</LastGenOutput>
+    </Content>
+    <Content Include="SMSDBContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SMSDBContext.edmx</DependentUpon>
+      <LastGenOutput>SMSDBContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SMSDBContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SMSDBContext.edmx</DependentUpon>
+      <LastGenOutput>SMSDBContext.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

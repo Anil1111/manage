@@ -14,6 +14,7 @@ using System.Linq.Expressions;
 using System.Web;
 using Manage.Core.Encrypt;
 using Manage.Core.Infrastructure;
+using Manage.Service.SYS.Interface;
 
 namespace Manage.Service
 {
@@ -22,11 +23,13 @@ namespace Manage.Service
         private readonly IRepository<Sys_User> _userRepository;
         private readonly IRoleService _roleService;
         private readonly ICacheManager _cacheManager;
-        public UserService(IRepository<Sys_User> userRepository, IRoleService roleService, ICacheManager cacheManager)
+        private readonly IMessageService _messageService;
+        public UserService(IRepository<Sys_User> userRepository, IRoleService roleService, ICacheManager cacheManager, IMessageService _messageService)
         {
             this._userRepository = userRepository;
             this._roleService = roleService;
             this._cacheManager = cacheManager;
+            this._messageService = _messageService;
         }
 
         public Page<Sys_User> FindPage(UserVM form)
@@ -189,6 +192,8 @@ namespace Manage.Service
                 this._cacheManager.Set(us.TokenId, us);
                 List<ModuleVM> moduleList = GetModule(us);
                 CreateMenu(moduleList);
+
+                Message msg = this._messageService.GetMessage();
             }
         }
 

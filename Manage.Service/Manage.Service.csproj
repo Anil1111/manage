@@ -79,6 +79,8 @@
     <Compile Include="InfrastructureRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceRegister.cs" />
+    <Compile Include="SYS\MessageService.cs" />
+    <Compile Include="SYS\Interface\IMessageService.cs" />
     <Compile Include="SYS\Interface\IPermissionService.cs" />
     <Compile Include="SYS\Interface\IModuleService.cs" />
     <Compile Include="SYS\Interface\IRoleService.cs" />
