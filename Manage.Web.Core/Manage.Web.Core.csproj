@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\UserState.cs" />
+    <Compile Include="Filter\MyActionFilterAttribute.cs" />
+    <Compile Include="Filter\MyExceptionFilterAttribute.cs" />
     <Compile Include="Infrastructure\BaseExtensions.cs" />
     <Compile Include="Infrastructure\WebTypeFinder.cs" />
     <Compile Include="Mvc\BaseController.cs" />

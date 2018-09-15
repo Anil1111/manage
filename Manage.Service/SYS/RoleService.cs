@@ -1,5 +1,6 @@
 ﻿using Manage.Core.Data;
 using Manage.Core.Extend;
+using Manage.Core.Infrastructure;
 using Manage.Core.Pageing;
 using Manage.Data;
 using Manage.Data.Data;
@@ -65,7 +66,7 @@ namespace Manage.Service
 
         public Page<Sys_Role> FindPage(UserRoleVM form)
         {
-            Expression<Func<Sys_Role, bool>> predicate = ExtLinq.True<Sys_Role>();
+            Expression<Func<Sys_Role, bool>> predicate = Ext.True<Sys_Role>();
             OrderModelField idOrder = new OrderModelField
             {
                 PropertyName = "Id",

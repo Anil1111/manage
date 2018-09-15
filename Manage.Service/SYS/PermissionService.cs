@@ -1,5 +1,6 @@
 ﻿using Manage.Core.Data;
 using Manage.Core.Extend;
+using Manage.Core.Infrastructure;
 using Manage.Core.Pageing;
 using Manage.Data;
 using Manage.Data.Data;
@@ -27,7 +28,7 @@ namespace Manage.Service
 
         public Page<Sys_Permission> FindPage(PermissionVM form)
         {
-            Expression<Func<Sys_Permission, bool>> predicate = ExtLinq.True<Sys_Permission>();
+            Expression<Func<Sys_Permission, bool>> predicate = Ext.True<Sys_Permission>();
             if (!string.IsNullOrEmpty(form.Name))
             {
                 predicate = predicate.And(s => s.Name.Contains(form.Name));

@@ -109,7 +109,7 @@
     <Compile Include="Caching\NullCacheManager.cs" />
     <Compile Include="Caching\RedisCacheManager.cs" />
     <Compile Include="Data\BaseException.cs" />
-    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Data\OrderModelField.cs" />
     <Compile Include="Data\ReturnResult.cs" />
     <Compile Include="Data\SuperConstants.cs" />
@@ -124,8 +124,9 @@
     <Compile Include="Infrastructure\IDependencyRegister.cs" />
     <Compile Include="Infrastructure\ITypeFinder.cs" />
     <Compile Include="Extend\ParameterRebinder.cs" />
-    <Compile Include="Infrastructure\ResponseJson.cs" />
+    <Compile Include="Json\ResponseJson.cs" />
     <Compile Include="Infrastructure\ServiceContainer.cs" />
+    <Compile Include="Json\JsonUtil.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Log4netManager.cs" />
     <Compile Include="Pageing\BasePage.cs" />
@@ -136,12 +137,10 @@
     <Compile Include="Utility\CheckCodeUtil.cs" />
     <Compile Include="Utility\ConfigUtil.cs" />
     <Compile Include="Utility\CookiesUtil.cs" />
-    <Compile Include="Utility\EnumUtil.cs" />
     <Compile Include="Utility\FileUtil.cs" />
     <Compile Include="Utility\FtpUtil.cs" />
     <Compile Include="Utility\GZipUtil.cs" />
     <Compile Include="Utility\HttpUtil.cs" />
-    <Compile Include="Utility\JsonUtil.cs" />
     <Compile Include="Utility\MailUtil.cs" />
     <Compile Include="Utility\NetUtil.cs" />
     <Compile Include="Utility\QrCodeUtil.cs" />

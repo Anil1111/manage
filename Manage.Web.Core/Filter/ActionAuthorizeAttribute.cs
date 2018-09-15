@@ -1,5 +1,6 @@
 ﻿using Manage.Core.Data;
 using Manage.Core.Infrastructure;
+using Manage.Core.Json;
 using Manage.Data;
 using Manage.Data.Domain;
 using Manage.Service;
@@ -11,6 +12,9 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Core.Filter
 {
+    /// <summary>
+    /// IAuthorizationFilter
+    /// </summary>
     public class ActionAuthorizeAttribute : AuthorizeAttribute
     {
         public override void OnAuthorization(AuthorizationContext filterContext)

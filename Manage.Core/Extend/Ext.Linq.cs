@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Manage.Core.Extend
 {
-    public static partial class ExtLinq
+    public static partial class Ext
     {
         public static Expression<Func<T, bool>> True<T>() { return f => true; }
         public static Expression<Func<T, bool>> False<T>() { return f => false; }

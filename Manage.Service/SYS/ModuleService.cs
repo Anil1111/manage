@@ -1,5 +1,6 @@
 ﻿using Manage.Core.Data;
 using Manage.Core.Extend;
+using Manage.Core.Infrastructure;
 using Manage.Core.Pageing;
 using Manage.Data;
 using Manage.Data.Data;
@@ -34,7 +35,7 @@ namespace Manage.Service
 
         public Page<Sys_Module> FindPage(ModuleVM form)
         {
-            Expression<Func<Sys_Module, bool>> predicate = ExtLinq.True<Sys_Module>();
+            Expression<Func<Sys_Module, bool>> predicate = Ext.True<Sys_Module>();
             if (!string.IsNullOrEmpty(form.Name))
             {
                 predicate = predicate.And(s => s.Name.Contains(form.Name));

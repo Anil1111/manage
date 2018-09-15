@@ -1,7 +1,8 @@
 ﻿using Manage.Core.Data;
+using Manage.Core.Json;
 using Manage.Core.Utility;
 
-namespace Manage.Core.Infrastructure
+namespace Manage.Core.Json
 {
     public class ResponseJson
     {

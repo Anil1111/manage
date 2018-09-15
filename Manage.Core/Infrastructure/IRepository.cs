@@ -1,10 +1,11 @@
-﻿using Manage.Core.Pageing;
+﻿using Manage.Core.Data;
+using Manage.Core.Pageing;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq.Expressions;
 
-namespace Manage.Core.Data
+namespace Manage.Core.Infrastructure
 {
     public interface IRepository<T> where T : class, new()
     {

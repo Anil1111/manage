@@ -12,6 +12,7 @@ namespace Manage.Core.Utility
             return Guid.NewGuid().ToString();
         }
 
+        #region 在字符串左边用 paddingChar 补足 totalWidth 长度
         /// <summary>
         /// 在字符串左边用 paddingChar 补足 totalWidth 长度
         /// StringUtil.GetPadLeftStr("1", '0', 6) 000001
@@ -24,7 +25,9 @@ namespace Manage.Core.Utility
         {
             return str.PadLeft(totalWidth, paddingChar);
         }
+        #endregion
 
+        #region 去除html标记
         /// <summary>
         /// 去除html标记
         /// </summary>
@@ -57,7 +60,9 @@ namespace Manage.Core.Utility
             Htmlstring = Htmlstring.Replace(">", "&gt;");
             return Htmlstring;
         }
+        #endregion
 
+        #region 得到字符串长度，一个汉字长度为2
         /// <summary>
         /// 得到字符串长度，一个汉字长度为2
         /// </summary>
@@ -66,7 +71,6 @@ namespace Manage.Core.Utility
         public static int GetStrLength(string str)
         {
             Regex r = new Regex("[\u4e00-\u9fa5]+", RegexOptions.IgnoreCase);
-
             int length = str.Length;
             for (int i = 0; i < str.Length; i++)
             {
@@ -75,9 +79,9 @@ namespace Manage.Core.Utility
                     length++;
                 }
             }
-
             return length;
         }
+        #endregion
 
         #region 截取字符串
         /// <summary>
@@ -133,6 +137,7 @@ namespace Manage.Core.Utility
         }
         #endregion
 
+        #region 把字符串第一个字母转成大写
         /// <summary>
         /// 把字符串第一个字母转成大写
         /// </summary>
@@ -147,6 +152,7 @@ namespace Manage.Core.Utility
             }
             return newStr;
         }
+        #endregion
 
         #region PinYin(获取汉字的拼音简码)
         /// <summary>

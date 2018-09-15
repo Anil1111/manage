@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Manage.Core.Utility
+namespace Manage.Core.Json
 {
     public class JsonUtil
     {

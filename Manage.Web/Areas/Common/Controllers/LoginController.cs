@@ -3,10 +3,12 @@ using Manage.Core.Data;
 using Manage.Core.Encrypt;
 using Manage.Core.Extend;
 using Manage.Core.Infrastructure;
+using Manage.Core.Json;
 using Manage.Core.Utility;
 using Manage.Data.Domain;
 using Manage.Service;
 using Manage.Web.Core.Enums;
+using Manage.Web.Core.Filter;
 using Manage.Web.Core.Mvc;
 using System;
 using System.Web.Mvc;
@@ -28,6 +30,7 @@ namespace Manage.Web.Areas.Common.Controllers
             this._cacheManager = cacheManager;
         }
 
+        [MyActionFilterAttribute]
         // GET: Common/Login
         public ActionResult Index()
         {

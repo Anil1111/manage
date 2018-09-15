@@ -10,7 +10,7 @@ namespace Manage.Core.Extend
     /// <summary>
     /// 枚举
     /// </summary>
-    public class EnumExtension
+    public static partial class Ext
     {
         public static string GetRemark(Enum value)
         {

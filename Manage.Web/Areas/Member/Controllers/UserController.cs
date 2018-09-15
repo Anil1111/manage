@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Manage.Core.Data;
 using Manage.Core.Infrastructure;
+using Manage.Core.Json;
 using Manage.Core.Pageing;
 using Manage.Core.Utility;
 using Manage.Data;

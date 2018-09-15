@@ -1,4 +1,5 @@
-﻿using Manage.Core.Utility;
+﻿using Manage.Core.Json;
+using Manage.Core.Utility;
 using StackExchange.Redis;
 using System;
 using System.Text;

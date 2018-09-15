@@ -13,6 +13,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using Manage.Core.Encrypt;
+using Manage.Core.Infrastructure;
 
 namespace Manage.Service
 {
@@ -30,7 +31,7 @@ namespace Manage.Service
 
         public Page<Sys_User> FindPage(UserVM form)
         {
-            Expression<Func<Sys_User, bool>> predicate = ExtLinq.True<Sys_User>();
+            Expression<Func<Sys_User, bool>> predicate = Ext.True<Sys_User>();
             if (!string.IsNullOrEmpty(form.UserName))
             {
                 predicate = predicate.And(s => s.UserName.Contains(form.UserName));

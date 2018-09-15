@@ -6,7 +6,6 @@ namespace Manage.Core.Extend
     public class ParameterRebinder : ExpressionVisitor
     {
         private readonly Dictionary<ParameterExpression, ParameterExpression> map;
-
         public ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> map)
         {
             // 空合并运算符(??)
