@@ -131,7 +131,6 @@ namespace Manage.Core.Extend
                 return null;
             return Math.Round(result.Value, digits);
         }
-
         #endregion
 
         #region 日期转换
@@ -161,7 +160,6 @@ namespace Manage.Core.Extend
                 return result;
             return null;
         }
-
         #endregion
 
         #region 布尔转换
@@ -221,7 +219,6 @@ namespace Manage.Core.Extend
                 return result;
             return null;
         }
-
         #endregion
 
         #region 字符串转换
@@ -235,6 +232,7 @@ namespace Manage.Core.Extend
         }
         #endregion
 
+        #region 转换为16进制
         /// <summary>
         /// 转换为16进制
         /// </summary>
@@ -254,6 +252,7 @@ namespace Manage.Core.Extend
             }
             return hexString;
         }
+        #endregion
 
         public static T1 CopyFrom<T1, T2>(this T1 obj, T2 otherObject)
         where T1 : class

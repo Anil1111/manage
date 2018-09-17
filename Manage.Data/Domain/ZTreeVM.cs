@@ -15,16 +15,13 @@ namespace Manage.Data.Domain
     public class Children
     {
         public string name { get; set; }
-
         public List<ChildrenItem> children { get; set; }
     }
 
     public class Parent
     {
         public string name { get; set; }
-
         public bool open { get; set; }
-
         public List<Children> children { get; set; }
     }
 

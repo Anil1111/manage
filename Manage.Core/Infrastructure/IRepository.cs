@@ -7,8 +7,18 @@ using System.Linq.Expressions;
 
 namespace Manage.Core.Infrastructure
 {
+    /// <summary>
+    /// EF仓库
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : class, new()
     {
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="dbContext">EF上下文</param>
+        /// <param name="entity">实体</param>
+        /// <returns></returns>
         int Insert(DbContext dbContext, T entity);
 
         int Insert(DbContext dbContext, List<T> entities);

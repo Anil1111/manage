@@ -1,5 +1,8 @@
 ﻿namespace Manage.Core.Data
 {
+    /// <summary>
+    /// const关键字限定一个变量不允许被改变
+    /// </summary>
     public class SuperConstants
     {
         /// <summary>

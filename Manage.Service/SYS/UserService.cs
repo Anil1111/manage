@@ -15,6 +15,7 @@ using System.Web;
 using Manage.Core.Encrypt;
 using Manage.Core.Infrastructure;
 using Manage.Service.SYS.Interface;
+using Manage.Core.Logging;
 
 namespace Manage.Service
 {
@@ -24,12 +25,19 @@ namespace Manage.Service
         private readonly IRoleService _roleService;
         private readonly ICacheManager _cacheManager;
         private readonly IMessageService _messageService;
-        public UserService(IRepository<Sys_User> userRepository, IRoleService roleService, ICacheManager cacheManager, IMessageService _messageService)
+        private readonly ILogger _Logger;
+        public UserService(
+            IRepository<Sys_User> userRepository,
+            IRoleService roleService,
+            ICacheManager cacheManager,
+            IMessageService _messageService,
+            ILogger _Logger)
         {
             this._userRepository = userRepository;
             this._roleService = roleService;
             this._cacheManager = cacheManager;
             this._messageService = _messageService;
+            this._Logger = _Logger;
         }
 
         public Page<Sys_User> FindPage(UserVM form)
@@ -115,7 +123,6 @@ namespace Manage.Service
                 PropertyName = "Password",
                 IsDESC = false
             };
-
             OrderModelField[] orderByExpression = new OrderModelField[] {
                idOrder,
                usernameOrder
@@ -180,6 +187,7 @@ namespace Manage.Service
                 {
                     throw new BaseException(SuperConstants.AJAX_RETURN_STATE_ERROR, "用户名或密码错误");
                 }
+                //ContextDB.managerDBContext.Database.Log += c => _Logger.Info(c);
 
                 UserSession us = new UserSession
                 {
@@ -281,7 +289,9 @@ namespace Manage.Service
             Sys_User user = this._userRepository.Entity(ContextDB.managerDBContext, m => m.Id == userId);
 
             if (user.Password != MD5Encrypt.Encrypt(oldPassword))
+            {
                 throw new BaseException(SuperConstants.AJAX_RETURN_STATE_ERROR, "原始密码错误");
+            }
             else
             {
                 user.Password = MD5Encrypt.Encrypt(oldPassword);

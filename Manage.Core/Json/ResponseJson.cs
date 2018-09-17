@@ -4,6 +4,9 @@ using Manage.Core.Utility;
 
 namespace Manage.Core.Json
 {
+    /// <summary>
+    /// 输出JSON
+    /// </summary>
     public class ResponseJson
     {
         public static string Success()

@@ -25,7 +25,15 @@ namespace Manage.Service
         private readonly IRepository<Sys_Permission> _permissionRepository;
         private readonly IRepository<Sys_UserGroupUser> _userGroupUserRepository;
         private readonly IRepository<Sys_RoleUser> _roleUserRepository;
-        public RoleService(IRepository<Sys_Role> roleRepository, IRepository<Sys_PermissionRole> permissionRoleRepository, IRepository<Sys_Module> moduleRoleRepository, IRepository<Sys_UserGroupRole> userGroupRoleRepository, IModuleService moduleService, IRepository<Sys_Permission> permissionRepository, IRepository<Sys_UserGroupUser> userGroupUserRepository, IRepository<Sys_RoleUser> roleUserRepository)
+        public RoleService(
+            IRepository<Sys_Role> roleRepository, 
+            IRepository<Sys_PermissionRole> permissionRoleRepository, 
+            IRepository<Sys_Module> moduleRoleRepository, 
+            IRepository<Sys_UserGroupRole> userGroupRoleRepository, 
+            IModuleService moduleService, 
+            IRepository<Sys_Permission> permissionRepository, 
+            IRepository<Sys_UserGroupUser> userGroupUserRepository, 
+            IRepository<Sys_RoleUser> roleUserRepository)
         {
             this._roleRepository = roleRepository;
             this._permissionRoleRepository = permissionRoleRepository;

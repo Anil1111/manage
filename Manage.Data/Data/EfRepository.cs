@@ -17,6 +17,11 @@ namespace Manage.Data.Data
     {
         public int Insert(DbContext dbContext, T entity)
         {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
             EntityState state = dbContext.Entry(entity).State;
             if (state == EntityState.Detached)
             {
@@ -100,12 +105,12 @@ namespace Manage.Data.Data
 
         public T Entity(DbContext dbContext, Expression<Func<T, bool>> where)
         {
-            return dbContext.Set<T>().AsNoTracking().Where(where).SingleOrDefault();
+            return dbContext.Set<T>().AsNoTracking().Where(where).SingleOrDefault(); //去除缓存
         }
 
         public List<T> Entities(DbContext dbContext, Expression<Func<T, bool>> where)
         {
-            return dbContext.Set<T>().Where<T>(where).AsQueryable().ToList();
+            return dbContext.Set<T>().AsNoTracking().Where<T>(where).AsQueryable().ToList();
         }
 
         public List<T> Entities(DbContext dbContext, Expression<Func<T, bool>> where, OrderModelField[] orderByExpression)

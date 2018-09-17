@@ -14,6 +14,7 @@ namespace Manage.Core.Utility
         private string _error = "";
         private long _revtime = 0;
         private Encoding _chtEncoding = Encoding.Default;
+
         /// <summary>
         /// 返回结果
         /// </summary>

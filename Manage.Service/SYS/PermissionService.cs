@@ -19,7 +19,10 @@ namespace Manage.Service
         private readonly IRepository<Sys_Permission> _permissionRepository;
         private readonly IRepository<Sys_Module> _moduleRepository;
         private readonly IRepository<Sys_PermissionRole> _permissionRoleRepository;
-        public PermissionService(IRepository<Sys_Permission> permissionRepository, IRepository<Sys_Module> moduleRepository, IRepository<Sys_PermissionRole> permissionRoleRepository)
+        public PermissionService(
+            IRepository<Sys_Permission> permissionRepository, 
+            IRepository<Sys_Module> moduleRepository, 
+            IRepository<Sys_PermissionRole> permissionRoleRepository)
         {
             this._permissionRepository = permissionRepository;
             this._moduleRepository = moduleRepository;

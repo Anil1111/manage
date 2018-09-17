@@ -109,7 +109,6 @@ namespace Manage.Core.Utility
                 {
                     Console.WriteLine(ex.ToString());
                 }
-
             })).Start();
         }
     }
