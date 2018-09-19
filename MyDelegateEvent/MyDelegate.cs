@@ -24,7 +24,6 @@ namespace MyDelegateEvent
                 string result = withReturnWithPara.Invoke(2);
                 Console.WriteLine(result);
             }
-
             {
                 //多播委托：一个变量保存多个方法，可以增减；invoke的时候可以按顺序执行
                 //+= 为委托实例按顺序增加方法，形成方法链，Invoke时，按顺序依次执行

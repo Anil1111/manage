@@ -6,8 +6,11 @@ namespace Manage.Data.Domain
     public class ChildrenItem
     {
         public string name { get; set; }
+
         public int Permission_Id { get; set; }
+
         public int Role_Id { get; set; }
+
         [JsonProperty("checked")]
         public bool Checked { get; set; }
     }

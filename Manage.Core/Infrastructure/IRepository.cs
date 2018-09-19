@@ -33,6 +33,15 @@ namespace Manage.Core.Infrastructure
 
         List<T> Entities(DbContext dbContext, Expression<Func<T, bool>> where, OrderModelField[] orderByExpression);
 
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="dbContext">EF上下文</param>
+        /// <param name="where">where</param>
+        /// <param name="orderByExpression">排序数组</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">页大小</param>
+        /// <returns></returns>
         Page<T> FindPage(DbContext dbContext, Expression<Func<T, bool>> where, OrderModelField[] orderByExpression, int pageIndex, int pageSize);
 
         int ExecuteSqlCommand(DbContext dbContext, string sql, params object[] parameters);

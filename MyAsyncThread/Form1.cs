@@ -30,6 +30,12 @@ namespace MyAsyncThread
             InitializeComponent();
         }
 
+        private static readonly object Lock = new object();
+        /// <summary>
+        /// 3.0 Task 是基于ThreadPool  Task增加了多个API
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnTask_Click(object sender, EventArgs e)
         {
             Console.WriteLine($"****************btnTask_Click Start {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}***************");
@@ -40,6 +46,17 @@ namespace MyAsyncThread
                  taskFactory.StartNew(o => this.Coding("风动寂野", "Portal"), "风动寂野"),
                  taskFactory.StartNew(o => this.Coding("笑看风云", "Service"), "笑看风云")
             };
+            //线程锁，线程安全
+            taskList.Add(
+                taskFactory.StartNew(() =>
+                {
+                    lock (Lock)
+                    {
+                        this.DoSomethingLong("btnTask_Click");
+                    }
+                }
+            ));
+
             //taskFactory.StartNew(
             //    () => this.DoSomethingLong("btnTask_Click")
             //);
@@ -91,6 +108,11 @@ namespace MyAsyncThread
             }
             //Thread.Sleep(2000);
             Console.WriteLine($"****************DoSomethingLong {name} End {Thread.CurrentThread.ManagedThreadId.ToString("00")} {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} {lResult}***************");
+        }
+
+        private void btnAsyncAwait_Click(object sender, EventArgs e)
+        {
+            AwaitAsyncLibrary.AwaitAsyncILSpy.Show();
         }
     }
 }

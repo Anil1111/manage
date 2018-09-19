@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Manage.Core.Extend
 {
@@ -40,6 +37,7 @@ namespace Manage.Core.Extend
         {
             return dateTime.ToString("yyyy-MM-dd");
         }
+
         /// <summary>
         /// 获取格式化字符串，不带时分秒，格式："yyyy-MM-dd"
         /// </summary>

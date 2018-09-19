@@ -158,12 +158,12 @@ namespace Manage.Data.Data
                     query = query.Provider.CreateQuery<T>(resultExp);
                 }
             }
-            var query1 = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            var queryResult = query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
 
             Page<T> p = new Page<T>
             {
                 TotalRecord = query.Count(),
-                ResultList = query1.ToList(),
+                ResultList = queryResult.ToList(),
                 PageIndex = pageIndex,
                 PageSize = pageSize,
                 PageCount = (query.Count() + pageSize - 1) / pageSize

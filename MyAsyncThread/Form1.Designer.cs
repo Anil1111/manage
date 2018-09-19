@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.btnTask = new System.Windows.Forms.Button();
+            this.btnAsyncAwait = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTask
@@ -41,11 +42,22 @@
             this.btnTask.UseVisualStyleBackColor = true;
             this.btnTask.Click += new System.EventHandler(this.btnTask_Click);
             // 
+            // btnAsyncAwait
+            // 
+            this.btnAsyncAwait.Location = new System.Drawing.Point(97, 143);
+            this.btnAsyncAwait.Name = "btnAsyncAwait";
+            this.btnAsyncAwait.Size = new System.Drawing.Size(138, 47);
+            this.btnAsyncAwait.TabIndex = 9;
+            this.btnAsyncAwait.Text = "AsyncAwait";
+            this.btnAsyncAwait.UseVisualStyleBackColor = true;
+            this.btnAsyncAwait.Click += new System.EventHandler(this.btnAsyncAwait_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 169);
+            this.ClientSize = new System.Drawing.Size(364, 325);
+            this.Controls.Add(this.btnAsyncAwait);
             this.Controls.Add(this.btnTask);
             this.Name = "Form1";
             this.Text = "异步多线程";
@@ -56,6 +68,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnTask;
+        private System.Windows.Forms.Button btnAsyncAwait;
     }
 }
 

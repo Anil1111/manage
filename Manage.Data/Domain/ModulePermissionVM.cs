@@ -9,7 +9,9 @@ namespace Manage.Data.Domain
     public class ModulePermissionVM
     {
         public string code { get; set; }
+
         public string LinkUrl { get; set; }
+
         public int Id { get; set; } 
     }
 }
