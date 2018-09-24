@@ -8,15 +8,17 @@ namespace Manage.Core.Utility
     {
         public static string GetValue(string key)
         {
-            ICacheManager cacheManager = ServiceContainer.Resolve<ICacheManager>();
+            //ICacheManager cacheManager = ServiceContainer.Resolve<ICacheManager>();
 
-            string cacheKey = "AppSettings-" + key;
-            if (!cacheManager.Contains(cacheKey))
-            {
-                cacheManager.Set(cacheKey, ConfigurationManager.AppSettings[key]);
-            }
+            //string cacheKey = "AppSettings-" + key;
+            //if (!cacheManager.Contains(cacheKey))
+            //{
+            //    cacheManager.Set(cacheKey, ConfigurationManager.AppSettings[key]);
+            //}
 
-            return cacheManager.Get<object>(cacheKey).ToString();
+            //return cacheManager.Get<object>(cacheKey).ToString();
+
+            return ConfigurationManager.AppSettings[key];
         }
     }
 }

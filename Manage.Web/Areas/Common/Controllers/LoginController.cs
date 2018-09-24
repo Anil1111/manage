@@ -33,6 +33,8 @@ namespace Manage.Web.Areas.Common.Controllers
             //string remark = EnumExtension.GetRemark(UserState.Normal);
             //string desEn = DesEncrypt.Encrypt("王殃殃", "learun###***");
             //string desDe = DesEncrypt.Decrypt(desEn, "learun###***");
+            //this._cacheManager.Set("123", "111");
+            //string val = this._cacheManager.Get<string>("123");
 
             return View();
         }

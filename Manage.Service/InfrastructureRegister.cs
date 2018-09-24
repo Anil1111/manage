@@ -9,7 +9,8 @@ namespace Manage.Service
     {
         public void RegisterTypes(IUnityContainer container)
         {
-            container.RegisterType<ICacheManager, MemoryCacheManager>();
+            container.RegisterType<ICacheManager, RedisCacheManager>();
+            //container.RegisterType<ICacheManager, MemoryCacheManager>();
             container.RegisterType<ILogger, Log4netManager>();
         }
     }
