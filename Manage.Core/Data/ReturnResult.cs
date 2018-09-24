@@ -5,8 +5,19 @@
         public ReturnResult()
         { }
 
+        /// <summary>
+        /// 状态
+        /// </summary>
         public object state { get; set; }
+
+        /// <summary>
+        /// 消息
+        /// </summary>
         public string message { get; set; }
+
+        /// <summary>
+        /// 结果
+        /// </summary>
         public object data { get; set; }
 
         public ReturnResult(int state)
