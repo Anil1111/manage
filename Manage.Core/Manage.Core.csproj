@@ -118,7 +118,6 @@
     <Compile Include="Encrypt\MD5Encrypt.cs" />
     <Compile Include="Extend\Ext.Enum.cs" />
     <Compile Include="Extend\Ext.Convert.cs" />
-    <Compile Include="Extend\Ext.DateTime.cs" />
     <Compile Include="Extend\Ext.Linq.cs" />
     <Compile Include="Infrastructure\AppDomainTypeFinder.cs" />
     <Compile Include="Infrastructure\IDependencyRegister.cs" />

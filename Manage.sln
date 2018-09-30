@@ -15,10 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manage.Web", "Manage.Web\Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manage.Test", "Manage.Test\Manage.Test.csproj", "{2BA4BF59-CCAB-4DE4-944C-AC653BE52B1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manage.Api", "Manage.Api\Manage.Api.csproj", "{032DB34D-9A55-49EB-A909-2CD3B081C57E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manage.WcfService", "Manage.WcfService\Manage.WcfService.csproj", "{5CD177A2-3793-47EE-B3DF-1E3EE3D067B9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAsyncThread", "MyAsyncThread\MyAsyncThread.csproj", "{8BBA9334-B123-488C-82BF-4DE0F320B44C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDelegateEvent", "MyDelegateEvent\MyDelegateEvent.csproj", "{F750EE3C-1889-4C21-993E-A9B563199EA9}"
@@ -53,14 +49,6 @@ Global
 		{2BA4BF59-CCAB-4DE4-944C-AC653BE52B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BA4BF59-CCAB-4DE4-944C-AC653BE52B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BA4BF59-CCAB-4DE4-944C-AC653BE52B1B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{032DB34D-9A55-49EB-A909-2CD3B081C57E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{032DB34D-9A55-49EB-A909-2CD3B081C57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{032DB34D-9A55-49EB-A909-2CD3B081C57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{032DB34D-9A55-49EB-A909-2CD3B081C57E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CD177A2-3793-47EE-B3DF-1E3EE3D067B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CD177A2-3793-47EE-B3DF-1E3EE3D067B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CD177A2-3793-47EE-B3DF-1E3EE3D067B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CD177A2-3793-47EE-B3DF-1E3EE3D067B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8BBA9334-B123-488C-82BF-4DE0F320B44C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8BBA9334-B123-488C-82BF-4DE0F320B44C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BBA9334-B123-488C-82BF-4DE0F320B44C}.Release|Any CPU.ActiveCfg = Release|Any CPU
