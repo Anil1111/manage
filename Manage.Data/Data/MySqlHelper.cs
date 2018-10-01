@@ -254,6 +254,5 @@ namespace Manage.Data.Data
                     cmd.Parameters.Add(parm);
             }
         }
-
     }
 }

@@ -49,12 +49,12 @@ namespace Manage.Service
             }
             if (!string.IsNullOrEmpty(form.BeginDate))
             {
-                DateTime dt = Ext.ToDate(form.BeginDate);
+                DateTime dt = DateTime.Parse(form.BeginDate);
                 predicate = predicate.And(s => s.UpdateDate >= dt);
             }
             if (!string.IsNullOrEmpty(form.EndDate))
             {
-                DateTime dt = Ext.ToDate(form.EndDate);
+                DateTime dt = DateTime.Parse(form.EndDate);
                 predicate = predicate.And(s => s.UpdateDate <= dt);
             }
 

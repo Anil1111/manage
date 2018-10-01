@@ -12,6 +12,11 @@ namespace Manage.Core.Extend
     /// </summary>
     public static partial class Ext
     {
+        /// <summary>
+        /// 得到枚举备注
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string GetRemark(Enum value)
         {
             Type type = value.GetType();

@@ -4,6 +4,9 @@ using Unity;
 
 namespace Manage.Core.Infrastructure
 {
+    /// <summary>
+    /// 服务容器
+    /// </summary>
     public static class ServiceContainer
     {
         static Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() => new UnityContainer());

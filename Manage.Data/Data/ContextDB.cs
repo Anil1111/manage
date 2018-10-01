@@ -1,7 +1,7 @@
 ﻿namespace Manage.Data.Data
 {
     /// <summary>
-    /// EF上下文
+    /// EF数据库上下文
     /// </summary>
     public class ContextDB
     {
