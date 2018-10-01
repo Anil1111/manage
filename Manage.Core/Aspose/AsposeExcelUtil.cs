@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 
-namespace Manage.Core.Utility
+namespace Manage.Core.Aspose
 {
     /// <summary>
     /// AsposeExcel 帮助类

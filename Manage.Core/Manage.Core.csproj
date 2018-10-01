@@ -132,7 +132,7 @@
     <Compile Include="Pageing\Page.cs" />
     <Compile Include="Pageing\Pageination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\AsposeExcelUtil.cs" />
+    <Compile Include="Aspose\AsposeExcelUtil.cs" />
     <Compile Include="Utility\CheckCodeUtil.cs" />
     <Compile Include="Utility\ConfigUtil.cs" />
     <Compile Include="Utility\CookiesUtil.cs" />
