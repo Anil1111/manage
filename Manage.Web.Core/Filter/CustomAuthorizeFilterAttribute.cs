@@ -15,13 +15,20 @@ namespace Manage.Web.Core.Filter
     /// <summary>
     /// IAuthorizationFilter
     /// </summary>
-    public class CustomAuthorizeAttribute : AuthorizeAttribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true)]
+    public class CustomAuthorizeFilterAttribute : AuthorizeAttribute
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             if (filterContext == null)
             {
                 throw new ArgumentNullException(nameof(filterContext));
+            }
+
+            if (filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute),true)
+                || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true))
+            {
+                return;//表示支持控制器、action的AllowAnonymousAttribute
             }
 
             string controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
@@ -33,7 +40,8 @@ namespace Manage.Web.Core.Filter
             {
                 if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
-                    filterContext.Result = new ContentResult {
+                    filterContext.Result = new ContentResult
+                    {
                         Content = JsonUtil.SerializerObject(new ReturnResult(SuperConstants.AJAX_RETURN_STATE_LOGIN, "未登录"))
                     };
                 }

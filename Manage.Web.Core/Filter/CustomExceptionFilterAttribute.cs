@@ -7,7 +7,7 @@ namespace Manage.Web.Core.Filter
     /// <summary>
     /// 自定义异常 action里面不需要try{} catch{}
     /// </summary>
-    public class CustomExceptionAttribute : HandleErrorAttribute
+    public class CustomExceptionFilterAttribute : HandleErrorAttribute
     {
         private static ILogger _logger
         {

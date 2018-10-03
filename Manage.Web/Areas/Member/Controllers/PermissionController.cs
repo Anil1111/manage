@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [CustomAuthorizeAttribute()]
+    [CustomAuthorizeFilterAttribute()]
     public class PermissionController : BaseController
     {
         private readonly IPermissionService _permissionService;
@@ -27,7 +27,7 @@ namespace Manage.Web.Areas.Member.Controllers
             this._moduleService = moduleService;
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult Index(PermissionVM form)
         {
             Page<Sys_Permission> page = this._permissionService.FindPage(form);
@@ -39,7 +39,7 @@ namespace Manage.Web.Areas.Member.Controllers
             return View();
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult PermissionInsert()
         {
             List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId != null && t.ParentId != 0).ToList();
@@ -74,7 +74,7 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult PermissionEdit(PermissionVM form)
         {
             List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId != null && t.ParentId != 0).ToList();

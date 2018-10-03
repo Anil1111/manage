@@ -66,13 +66,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\UserState.cs" />
-    <Compile Include="Filter\MyActionFilterAttribute.cs" />
-    <Compile Include="Filter\CustomExceptionAttribute.cs" />
+    <Compile Include="Filter\CompressFilterAttribute.cs" />
+    <Compile Include="Filter\CustomExceptionFilterAttribute.cs" />
     <Compile Include="Infrastructure\BaseExtensions.cs" />
     <Compile Include="Infrastructure\WebTypeFinder.cs" />
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Filter\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Filter\CustomAuthorizeFilterAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Manage.Core\Manage.Core.csproj">

@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [CustomAuthorizeAttribute()]
+    [CustomAuthorizeFilterAttribute()]
     public class ModuleController : BaseController
     {
         private readonly IModuleService _moduleService;
@@ -23,7 +23,7 @@ namespace Manage.Web.Areas.Member.Controllers
             this._moduleService = moduleService;
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult Index(ModuleVM form)
         {
             Page<Sys_Module> page = this._moduleService.FindPage(form);
@@ -32,7 +32,7 @@ namespace Manage.Web.Areas.Member.Controllers
             return View();
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult ModuleInsert()
         {
             List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId == null || t.ParentId == 0).ToList();
@@ -67,7 +67,7 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult ModuleEdit(ModuleVM form)
         {
             List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId == null || t.ParentId == 0).ToList();

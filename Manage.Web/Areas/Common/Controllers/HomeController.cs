@@ -18,13 +18,13 @@ namespace Manage.Web.Areas.Common.Controllers
             this._userService = userService;
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult Index()
         {
             return View();
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult UpdatePwd()
         {
             return View();
@@ -51,7 +51,7 @@ namespace Manage.Web.Areas.Common.Controllers
             }
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult NoPermissions()
         {
             return View();

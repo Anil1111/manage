@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [CustomAuthorizeAttribute()]
+    [CustomAuthorizeFilterAttribute()]
     public class UserGroupController : BaseController
     {
         private readonly IUserGroupService _userGroupService;
@@ -28,7 +28,7 @@ namespace Manage.Web.Areas.Member.Controllers
             this._roleService = roleService;
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult Index(UserGroupVM form)
         {
             Page<Sys_UserGroup> page = this._userGroupService.FindPage(form);
@@ -37,7 +37,7 @@ namespace Manage.Web.Areas.Member.Controllers
             return View();
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult UserGroupInsert()
         {
             Sys_UserGroup model = new Sys_UserGroup
@@ -69,7 +69,7 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult UserGroupEdit(UserGroupVM form)
         {
             Sys_UserGroup model = this._userGroupService.GetUserGroup(form);
@@ -119,34 +119,28 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionFilterAttribute()]
         public ActionResult SetRolesUserGroup(UserGroupVM form)
         {
-            try
+            List<Sys_Role> list = this._roleService.GetRoleList();
+            if (list != null && list.Count > 0)
             {
-                List<Sys_Role> list = this._roleService.GetRoleList();
-                if (list != null && list.Count > 0)
+                List<Sys_UserGroupRole> userGroupRoleList = this._roleService.GetUserGroupRoleList();
+                foreach (var item in list)
                 {
-                    List<Sys_UserGroupRole> userGroupRoleList = this._roleService.GetUserGroupRoleList();
-                    foreach (var item in list)
+                    var checkList = userGroupRoleList.Where(t => t.Role_Id == item.Id && t.UserGroup_Id == form.Id).ToList();
+                    if (checkList != null && checkList.Count > 0)
                     {
-                        var checkList = userGroupRoleList.Where(t => t.Role_Id == item.Id && t.UserGroup_Id == form.Id).ToList();
-                        if (checkList != null && checkList.Count > 0)
-                        {
-                            item.Check = true;
-                        }
-                        else
-                        {
-                            item.Check = false;
-                        }
+                        item.Check = true;
+                    }
+                    else
+                    {
+                        item.Check = false;
                     }
                 }
-                ViewBag.RoleList = list;
-                ViewBag.UserGroup_Id = form.Id;
             }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            ViewBag.RoleList = list;
+            ViewBag.UserGroup_Id = form.Id;
 
             return View();
         }

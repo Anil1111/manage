@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [CustomAuthorizeAttribute()]
+    [CustomAuthorizeFilterAttribute()]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
@@ -35,7 +35,7 @@ namespace Manage.Web.Areas.Member.Controllers
             this._mapperConfiguration = mapperConfiguration;
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult Index(UserVM form)
         {
             Page<Sys_User> page = this._userService.FindPage(form);
@@ -46,7 +46,7 @@ namespace Manage.Web.Areas.Member.Controllers
             return View();
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult UserInsert()
         {
             Sys_User model = new Sys_User
@@ -78,7 +78,7 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult UserEdit(UserVM form)
         {
             Sys_User model = this._userService.GetUser(form);
@@ -128,38 +128,32 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionFilterAttribute()]
         public ActionResult UserSetGroupUser(UserVM form)
         {
-            try
-            {
-                List<Sys_UserGroup> list = this._userGroupService.GetUserGroupList()
-                    .Where(t => t.Enabled == true)
-                    .ToList();
+            List<Sys_UserGroup> list = this._userGroupService.GetUserGroupList()
+                .Where(t => t.Enabled == true)
+                .ToList();
 
-                if (list != null && list.Count > 0)
+            if (list != null && list.Count > 0)
+            {
+                List<Sys_UserGroupUser> userGroupUserList = this._roleService.GetUserGroupUserList();
+                foreach (var item in list)
                 {
-                    List<Sys_UserGroupUser> userGroupUserList = this._roleService.GetUserGroupUserList();
-                    foreach (var item in list)
+                    var checkList = userGroupUserList.Where(t => t.UserGroup_Id == item.Id && t.User_Id == form.Id).ToList();
+                    if (checkList != null && checkList.Count > 0)
                     {
-                        var checkList = userGroupUserList.Where(t => t.UserGroup_Id == item.Id && t.User_Id == form.Id).ToList();
-                        if (checkList != null && checkList.Count > 0)
-                        {
-                            item.Check = true;
-                        }
-                        else
-                        {
-                            item.Check = false;
-                        }
+                        item.Check = true;
+                    }
+                    else
+                    {
+                        item.Check = false;
                     }
                 }
+            }
 
-                ViewBag.GroupList = list;
-                ViewBag.User_Id = form.Id;
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            ViewBag.GroupList = list;
+            ViewBag.User_Id = form.Id;
 
             return View();
         }
@@ -185,38 +179,32 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionFilterAttribute()]
         public ActionResult UserSetRolesUser(UserVM form)
         {
-            try
-            {
-                List<Sys_Role> list = this._roleService.GetRoleList()
-                    .Where(t => t.Enabled == true)
-                    .ToList();
+            List<Sys_Role> list = this._roleService.GetRoleList()
+            .Where(t => t.Enabled == true)
+            .ToList();
 
-                if (list != null && list.Count > 0)
+            if (list != null && list.Count > 0)
+            {
+                List<Sys_RoleUser> userRoleUserList = this._roleService.GetRoleUserList();
+                foreach (var item in list)
                 {
-                    List<Sys_RoleUser> userRoleUserList = this._roleService.GetRoleUserList();
-                    foreach (var item in list)
+                    var checkList = userRoleUserList.Where(t => t.Role_Id == item.Id && t.User_Id == form.Id).ToList();
+                    if (checkList != null && checkList.Count > 0)
                     {
-                        var checkList = userRoleUserList.Where(t => t.Role_Id == item.Id && t.User_Id == form.Id).ToList();
-                        if (checkList != null && checkList.Count > 0)
-                        {
-                            item.Check = true;
-                        }
-                        else
-                        {
-                            item.Check = false;
-                        }
+                        item.Check = true;
+                    }
+                    else
+                    {
+                        item.Check = false;
                     }
                 }
+            }
 
-                ViewBag.RoleList = list;
-                ViewBag.User_Id = form.Id;
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            ViewBag.RoleList = list;
+            ViewBag.User_Id = form.Id;
 
             return View();
         }

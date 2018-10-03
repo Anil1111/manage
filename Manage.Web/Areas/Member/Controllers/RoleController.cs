@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [CustomAuthorizeAttribute()]
+    [CustomAuthorizeFilterAttribute()]
     public class RoleController : BaseController
     {
         private readonly IRoleService _roleService;
@@ -23,7 +23,7 @@ namespace Manage.Web.Areas.Member.Controllers
             this._roleService = roleService;
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult Index(UserRoleVM form)
         {
             Page<Sys_Role> page = this._roleService.FindPage(form);
@@ -32,7 +32,7 @@ namespace Manage.Web.Areas.Member.Controllers
             return View();
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult RoleInsert()
         {
             Sys_Role model = new Sys_Role
@@ -64,7 +64,7 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult RoleEdit(UserRoleVM form)
         {
             Sys_Role model = this._roleService.GetRole(form);
@@ -114,7 +114,7 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
-        [CustomExceptionAttribute()]
+        [CustomExceptionFilterAttribute()]
         public ActionResult AuthorizePermission(int Id)
         {
             Root root = this._roleService.GetTree(Id);
