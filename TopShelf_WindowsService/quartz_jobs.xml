@@ -30,5 +30,25 @@
       </cron>
     </trigger>
 
+    <!--取消订单 任务配置-->
+    <job>
+      <name>CancelOrderJob</name>
+      <group>CancelOrder</group>
+      <description>取消订单</description>
+      <job-type>TopShelf_WindowsService.QuartzJobs.CancelOrderJob,TopShelf_WindowsService</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>CancelOrderJobTrigger</name>
+        <group>CancelOrder</group>
+        <job-name>CancelOrderJob</job-name>
+        <job-group>CancelOrder</job-group>
+        <start-time>2017-01-22T00:00:00+08:00</start-time>
+        <cron-expression>0/10 * * * * ?</cron-expression>
+      </cron>
+    </trigger>
+    
   </schedule>
 </job-scheduling-data>
