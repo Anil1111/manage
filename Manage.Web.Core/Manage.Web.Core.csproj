@@ -67,12 +67,12 @@
   <ItemGroup>
     <Compile Include="Enums\UserState.cs" />
     <Compile Include="Filter\MyActionFilterAttribute.cs" />
-    <Compile Include="Filter\MyExceptionFilterAttribute.cs" />
+    <Compile Include="Filter\CustomExceptionAttribute.cs" />
     <Compile Include="Infrastructure\BaseExtensions.cs" />
     <Compile Include="Infrastructure\WebTypeFinder.cs" />
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Filter\ActionAuthorizeAttribute.cs" />
+    <Compile Include="Filter\CustomAuthorizeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Manage.Core\Manage.Core.csproj">

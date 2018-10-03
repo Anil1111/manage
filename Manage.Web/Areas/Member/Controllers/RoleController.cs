@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [ActionAuthorizeAttribute()]
+    [CustomAuthorizeAttribute()]
     public class RoleController : BaseController
     {
         private readonly IRoleService _roleService;
@@ -23,36 +23,23 @@ namespace Manage.Web.Areas.Member.Controllers
             this._roleService = roleService;
         }
 
-        // GET: Member/Role
+        [CustomExceptionAttribute()]
         public ActionResult Index(UserRoleVM form)
         {
-            try
-            {
-                Page<Sys_Role> page = this._roleService.FindPage(form);
-                this.SavePage(page, form);
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Page<Sys_Role> page = this._roleService.FindPage(form);
+            this.SavePage(page, form);
 
             return View();
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult RoleInsert()
         {
-            try
+            Sys_Role model = new Sys_Role
             {
-                Sys_Role model = new Sys_Role
-                {
-                    Enabled = true
-                };
-                ViewBag.form = model;
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+                Enabled = true
+            };
+            ViewBag.form = model;
 
             return View();
         }
@@ -77,18 +64,12 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult RoleEdit(UserRoleVM form)
         {
-            try
-            {
-                Sys_Role model = this._roleService.GetRole(form);
-                ViewBag.form = model;
-                ViewData["type"] = "edit";
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Sys_Role model = this._roleService.GetRole(form);
+            ViewBag.form = model;
+            ViewData["type"] = "edit";
 
             return View("RoleInsert");
         }
@@ -133,17 +114,11 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult AuthorizePermission(int Id)
         {
-            try
-            {
-                Root root = this._roleService.GetTree(Id);
-                ViewBag.json = JsonUtil.SerializerObject(root.parent);
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Root root = this._roleService.GetTree(Id);
+            ViewBag.json = JsonUtil.SerializerObject(root.parent);
 
             return View();
         }

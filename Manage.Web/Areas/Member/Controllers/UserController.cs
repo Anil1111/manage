@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [ActionAuthorizeAttribute()]
+    [CustomAuthorizeAttribute()]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
@@ -35,38 +35,25 @@ namespace Manage.Web.Areas.Member.Controllers
             this._mapperConfiguration = mapperConfiguration;
         }
 
-        // GET: Member/User
+        [CustomExceptionAttribute()]
         public ActionResult Index(UserVM form)
         {
-            try
-            {
-                Page<Sys_User> page = this._userService.FindPage(form);
-                this.SavePage(page, form);
+            Page<Sys_User> page = this._userService.FindPage(form);
+            this.SavePage(page, form);
 
-                //List<UserVM> usersViewModelList = page.ResultList.AsQueryable().ProjectTo<UserVM>(_mapperConfiguration).ToList();
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            //List<UserVM> usersViewModelList = page.ResultList.AsQueryable().ProjectTo<UserVM>(_mapperConfiguration).ToList();
 
             return View();
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult UserInsert()
         {
-            try
+            Sys_User model = new Sys_User
             {
-                Sys_User model = new Sys_User
-                {
-                    Enabled = true
-                };
-                ViewBag.form = model;
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+                Enabled = true
+            };
+            ViewBag.form = model;
 
             return View();
         }
@@ -91,18 +78,12 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult UserEdit(UserVM form)
         {
-            try
-            {
-                Sys_User model = this._userService.GetUser(form);
-                ViewBag.form = model;
-                ViewData["type"] = "edit";
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Sys_User model = this._userService.GetUser(form);
+            ViewBag.form = model;
+            ViewData["type"] = "edit";
 
             return View("UserInsert");
         }

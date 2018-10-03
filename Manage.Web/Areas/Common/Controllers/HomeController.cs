@@ -3,6 +3,7 @@ using Manage.Core.Infrastructure;
 using Manage.Core.Json;
 using Manage.Core.Logging;
 using Manage.Service;
+using Manage.Web.Core.Filter;
 using Manage.Web.Core.Mvc;
 using System;
 using System.Web.Mvc;
@@ -17,11 +18,13 @@ namespace Manage.Web.Areas.Common.Controllers
             this._userService = userService;
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult Index()
         {
             return View();
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult UpdatePwd()
         {
             return View();
@@ -48,6 +51,7 @@ namespace Manage.Web.Areas.Common.Controllers
             }
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult NoPermissions()
         {
             return View();

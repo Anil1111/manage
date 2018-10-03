@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [ActionAuthorizeAttribute()]
+    [CustomAuthorizeAttribute()]
     public class UserGroupController : BaseController
     {
         private readonly IUserGroupService _userGroupService;
@@ -28,36 +28,23 @@ namespace Manage.Web.Areas.Member.Controllers
             this._roleService = roleService;
         }
 
-        // GET: Member/UserGroup
+        [CustomExceptionAttribute()]
         public ActionResult Index(UserGroupVM form)
         {
-            try
-            {
-                Page<Sys_UserGroup> page = this._userGroupService.FindPage(form);
-                this.SavePage(page, form);
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Page<Sys_UserGroup> page = this._userGroupService.FindPage(form);
+            this.SavePage(page, form);
 
             return View();
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult UserGroupInsert()
         {
-            try
+            Sys_UserGroup model = new Sys_UserGroup
             {
-                Sys_UserGroup model = new Sys_UserGroup
-                {
-                    Enabled = true
-                };
-                ViewBag.form = model;
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+                Enabled = true
+            };
+            ViewBag.form = model;
 
             return View();
         }
@@ -82,18 +69,12 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult UserGroupEdit(UserGroupVM form)
         {
-            try
-            {
-                Sys_UserGroup model = this._userGroupService.GetUserGroup(form);
-                ViewBag.form = model;
-                ViewData["type"] = "edit";
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Sys_UserGroup model = this._userGroupService.GetUserGroup(form);
+            ViewBag.form = model;
+            ViewData["type"] = "edit";
 
             return View("UserGroupInsert");
         }

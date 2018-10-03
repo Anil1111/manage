@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [ActionAuthorizeAttribute()]
+    [CustomAuthorizeAttribute()]
     public class PermissionController : BaseController
     {
         private readonly IPermissionService _permissionService;
@@ -27,42 +27,29 @@ namespace Manage.Web.Areas.Member.Controllers
             this._moduleService = moduleService;
         }
 
-        // GET: Member/Permission
+        [CustomExceptionAttribute()]
         public ActionResult Index(PermissionVM form)
         {
-            try
-            {
-                Page<Sys_Permission> page = this._permissionService.FindPage(form);
-                this.SavePage(page, form);
+            Page<Sys_Permission> page = this._permissionService.FindPage(form);
+            this.SavePage(page, form);
 
-                List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId != null && t.ParentId != 0).ToList();
-                ViewData["ModuleList"] = list;
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId != null && t.ParentId != 0).ToList();
+            ViewData["ModuleList"] = list;
 
             return View();
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult PermissionInsert()
         {
-            try
-            {
-                List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId != null && t.ParentId != 0).ToList();
-                ViewData["ModuleList"] = list;
+            List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId != null && t.ParentId != 0).ToList();
+            ViewData["ModuleList"] = list;
 
-                Sys_Permission permission = new Sys_Permission
-                {
-                    Enabled = true
-                };
-                ViewBag.form = permission;
-            }
-            catch (Exception ex)
+            Sys_Permission permission = new Sys_Permission
             {
-                _logger.Info(ex.Message);
-            }
+                Enabled = true
+            };
+            ViewBag.form = permission;
 
             return View();
         }
@@ -87,21 +74,15 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult PermissionEdit(PermissionVM form)
         {
-            try
-            {
-                List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId != null && t.ParentId != 0).ToList();
-                ViewData["ModuleList"] = list;
+            List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId != null && t.ParentId != 0).ToList();
+            ViewData["ModuleList"] = list;
 
-                Sys_Permission model = this._permissionService.GetPermission(form);
-                ViewBag.form = model;
-                ViewData["type"] = "edit";
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Sys_Permission model = this._permissionService.GetPermission(form);
+            ViewBag.form = model;
+            ViewData["type"] = "edit";
 
             return View("PermissionInsert");
         }

@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Member.Controllers
 {
-    [ActionAuthorizeAttribute()]
+    [CustomAuthorizeAttribute()]
     public class ModuleController : BaseController
     {
         private readonly IModuleService _moduleService;
@@ -23,39 +23,26 @@ namespace Manage.Web.Areas.Member.Controllers
             this._moduleService = moduleService;
         }
 
-        // GET: Member/Module
+        [CustomExceptionAttribute()]
         public ActionResult Index(ModuleVM form)
         {
-            try
-            {
-                Page<Sys_Module> page = this._moduleService.FindPage(form);
-                this.SavePage(page, form);
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Page<Sys_Module> page = this._moduleService.FindPage(form);
+            this.SavePage(page, form);
 
             return View();
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult ModuleInsert()
         {
-            try
-            {
-                List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId == null || t.ParentId == 0).ToList();
-                ViewData["ModuleList"] = list;
+            List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId == null || t.ParentId == 0).ToList();
+            ViewData["ModuleList"] = list;
 
-                Sys_Module model = new Sys_Module
-                {
-                    Enabled = true
-                };
-                ViewBag.form = model;
-            }
-            catch (Exception ex)
+            Sys_Module model = new Sys_Module
             {
-                _logger.Info(ex.Message);
-            }
+                Enabled = true
+            };
+            ViewBag.form = model;
 
             return View();
         }
@@ -80,21 +67,15 @@ namespace Manage.Web.Areas.Member.Controllers
             }
         }
 
+        [CustomExceptionAttribute()]
         public ActionResult ModuleEdit(ModuleVM form)
         {
-            try
-            {
-                List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId == null || t.ParentId == 0).ToList();
-                ViewData["ModuleList"] = list;
+            List<Sys_Module> list = this._moduleService.GetModuleList().Where(t => t.ParentId == null || t.ParentId == 0).ToList();
+            ViewData["ModuleList"] = list;
 
-                Sys_Module model = this._moduleService.GetModule(form);
-                ViewBag.form = model;
-                ViewData["type"] = "edit";
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            Sys_Module model = this._moduleService.GetModule(form);
+            ViewBag.form = model;
+            ViewData["type"] = "edit";
 
             return View("ModuleInsert");
         }

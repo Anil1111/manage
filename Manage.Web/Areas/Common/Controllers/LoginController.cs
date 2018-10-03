@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Manage.Web.Areas.Common.Controllers
 {
+
     public class LoginController : BaseController
     {
         private readonly UserService _userService;
@@ -26,8 +27,7 @@ namespace Manage.Web.Areas.Common.Controllers
             this._cacheManager = cacheManager;
         }
 
-        [MyActionFilterAttribute]
-        // GET: Common/Login
+        [CustomExceptionAttribute()]
         public ActionResult Index()
         {
             //string remark = EnumExtension.GetRemark(UserState.Normal);
@@ -36,9 +36,13 @@ namespace Manage.Web.Areas.Common.Controllers
             //this._cacheManager.Set("123", "111");
             //string val = this._cacheManager.Get<string>("123");
 
+            throw new Exception("11111");
+
             return View();
         }
 
+        [HttpGet]
+        [CustomExceptionAttribute()]
         public ActionResult ValidateCode()
         {
             string validateCode = CheckCodeUtil.RndNum(4);
@@ -66,16 +70,11 @@ namespace Manage.Web.Areas.Common.Controllers
             }
         }
 
+        [HttpPost]
+        [CustomExceptionAttribute()]
         public ActionResult LogOut()
         {
-            try
-            {
-                this._cacheManager.Remove(CookiesUtil.GetCookiesValue(SuperConstants.COOKIESID));
-            }
-            catch (Exception ex)
-            {
-                _logger.Info(ex.Message);
-            }
+            this._cacheManager.Remove(CookiesUtil.GetCookiesValue(SuperConstants.COOKIESID));
             return RedirectToAction("Index", "Login");
         }
     }
