@@ -75,3 +75,8 @@ function pageClickedEventStoppable() {
 function resetSearch() {
     $("#page").val(1);
 }
+
+function setTableBackgroundColorTr(obj) {
+    $("#fixTable>tbody>tr").css("background-color", "");
+    $(obj).css("background-color", "#c3ebff");
+}

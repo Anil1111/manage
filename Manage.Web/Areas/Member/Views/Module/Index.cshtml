@@ -62,7 +62,7 @@
                     @foreach (var item in (List<Sys_Module>)ViewBag.page.ResultList)
                     {
                         i += 1;
-                        <tr class="">
+                        <tr class="" onclick="setTableBackgroundColorTr(this)">
                             <td class="center">@i</td>
                             <td class="center">@Html.DisplayFor(modelItem => item.Name)</td>
                             <td class="center">@Html.DisplayFor(modelItem => item.ParentName)</td>

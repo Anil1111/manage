@@ -68,7 +68,6 @@ namespace Manage.Web.Areas.Common.Controllers
             }
         }
 
-        [HttpPost]
         [CustomExceptionFilterAttribute()]
         public ActionResult LogOut()
         {

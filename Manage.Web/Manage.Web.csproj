@@ -222,7 +222,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Css\base.css" />
+    <Content Include="Css\login.css" />
     <Content Include="Css\defaultTheme.css" />
     <Content Include="Css\myTheme.css" />
     <Content Include="Css\style.css" />
