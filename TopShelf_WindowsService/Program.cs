@@ -8,7 +8,6 @@ namespace TopShelf_WindowsService
     {
         public static void Main(string[] args)
         {
-
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "log4net.config"));
             HostFactory.Run(x =>
             {
