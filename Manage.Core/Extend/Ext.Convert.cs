@@ -7,7 +7,7 @@ namespace Manage.Core.Extend
 {
     public static partial class Ext
     {
-        #region ×Ö·û´®×ª»»
+        #region ×ª»»
         /// <summary>
         /// ×ª»»Îª×Ö·û´®
         /// </summary>
