@@ -39,7 +39,11 @@ namespace Manage.Web.Areas.Member.Controllers
         public ActionResult Index(UserVM form)
         {
             Page<Sys_User> page = this._userService.FindPage(form);
-            this.SavePage(page, form);
+            this.SavePage(page, form, form.HidSelectPage);
+
+            //SelectPage begin
+            ViewBag.SelectUserName = form.SelectUserNameKey;
+            //SelectPage end
 
             //List<UserVM> usersViewModelList = page.ResultList.AsQueryable().ProjectTo<UserVM>(_mapperConfiguration).ToList();
 

@@ -57,6 +57,11 @@ namespace Manage.Service
                 DateTime dt = DateTime.Parse(form.EndDate);
                 predicate = predicate.And(s => s.UpdateDate <= dt);
             }
+            if (!string.IsNullOrEmpty(form.SelectUserNameKey))
+            {
+                int id = Ext.ToInt(form.SelectUserNameKey);
+                predicate = predicate.And(s => s.Id == id);
+            }
 
             OrderModelField idOrder = new OrderModelField
             {
@@ -297,6 +302,11 @@ namespace Manage.Service
                 user.Password = MD5Encrypt.Encrypt(oldPassword);
                 return this._userRepository.Update(ContextDB.managerDBContext, user);
             }
+        }
+
+        public List<Sys_User> Entities()
+        {
+            return this._userRepository.Entities(ContextDB.managerDBContext, t => 1 == 1);
         }
     }
 }

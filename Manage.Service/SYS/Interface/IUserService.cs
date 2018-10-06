@@ -26,5 +26,7 @@ namespace Manage.Service
         int UserResetPwd(UserVM form);
 
         int UpdatePwd(string oldPassword, string password, int userId);
+
+        List<Sys_User> Entities();
     }
 }

@@ -3,14 +3,18 @@
     Layout = "~/Views/Shared/_AceLayout.cshtml";
 }
 @using Manage.Data;
+<!-- 插件使用的样式表文件 -->
+<link href="~/Res/SelectPage/selectpage.css" rel="stylesheet" />
+<!-- 插件核心脚本 -->
+<script src="~/Res/SelectPage/selectpage.js"></script>
 <div class="page-content">
     <div class="page-header" id="searchDiv" style="padding-bottom: 0px;">
-        <form id="searchForm" action="@Url.Action("Index", "User")" method="post">
+        <form id="searchForm" action="@Url.Action("Index", "User")" method="post" HidSelectPage="">
             <table width="100%">
                 <tr>
                     <td align="center" width="5%">账号</td>
                     <td width="5%">
-                        <input id="txtUserName" name="UserName" type="text" class="input-sm" placeholder="请输入账号" value="@ViewBag.form.UserName" maxlength="10"/>
+                        <input id="txtUserName" name="UserName" type="text" class="input-sm" placeholder="请输入账号" value="@ViewBag.form.UserName" maxlength="10" />
                     </td>
                     <td align="center" width="5%">更新时间</td>
                     <td width="10%">
@@ -21,6 +25,11 @@
                             </span>
                             <input id="endDate" name="EndDate" type="text" class="input-sm" placeholder="请输入结束日期" value="@ViewBag.form.EndDate" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd'})" readonly="readonly" style="padding: 0px 0px;height: 25px;width: 100px;" />
                         </div>
+                    </td>
+                    <td align="center" width="7%">selectPage</td>
+                    <td width="10%">
+                        <input type="text" id="SelectUserName" class="input-sm" placeholder="请输入selectPage" />
+                        <input type="hidden" name="SelectUserNameKey" value="" clear="false" id="SelectUserNameKey" />
                     </td>
                     <td align="right">
                         <button class="btn btn-info btn-sm" type="button" onclick="doSearch()">
@@ -33,6 +42,7 @@
                 </tr>
             </table>
             <input type="hidden" name="Id" value="" clear="false" id="Id" />
+            <input type="hidden" name="HidSelectPage" value="@ViewBag.page.HidSelectPage" clear="false" id="HidSelectPage" />
             @RenderPage("~/Views/Shared/_PageLayout.cshtml")
         </form>
     </div>
@@ -105,9 +115,30 @@
     <script src="~/Scripts/fixtable.js"></script>
 </div>
 <script type="text/javascript">
+    $(function () {
+        var url = "/Common/SelectPage/GetSelectPage?flag=1";
+        $.ajaxjson(url, {}, function (data) {
+            var d = eval(data);
+            //初始化插件
+            $('#SelectUserName').selectPage({
+                data: JSON.parse(d.data),
+                showField: 'desc', //showField：设置下拉列表中显示文本的列
+                keyField: 'id',//keyField：设置下拉列表项目中项目的KEY值，用于提交表单
+            });
+        });
+
+        if ($("#HidSelectPage").val() == "1") {
+            $('#SelectUserName').val('@ViewBag.SelectUserName');
+            $('#SelectUserName').selectPageRefresh();
+        }
+    });
+
     var formId = "searchForm";
     function doSearch() {
         resetSearch();
+        $("#HidSelectPage").val("1"); //只是一个标识
+        $("#SelectUserNameKey").val($("#SelectUserName").val());
+
         $("#" + formId).attr("action", "@Url.Action("Index", "User")");
         $("#" + formId).submit();
     }

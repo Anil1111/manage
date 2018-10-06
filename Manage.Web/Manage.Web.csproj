@@ -191,6 +191,7 @@
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\Common\Controllers\HomeController.cs" />
     <Compile Include="Areas\Common\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Common\Controllers\SelectPageController.cs" />
     <Compile Include="Areas\Common\Controllers\UploadController.cs" />
     <Compile Include="Areas\Member\Controllers\ModuleController.cs" />
     <Compile Include="Areas\Member\Controllers\PermissionController.cs" />
@@ -397,6 +398,9 @@
     <Content Include="Res\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
     <Content Include="Res\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="Res\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="Res\SelectPage\selectpage.css" />
+    <Content Include="Res\SelectPage\selectpage.js" />
+    <Content Include="Res\SelectPage\selectpage.min.js" />
     <Content Include="Res\zTree_v3\css\zTreeStyle\img\diy\1_close.png" />
     <Content Include="Res\zTree_v3\css\zTreeStyle\img\diy\1_open.png" />
     <Content Include="Res\zTree_v3\css\zTreeStyle\img\diy\2.png" />
@@ -436,6 +440,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Common\Views\SelectPage\" />
     <Folder Include="Areas\Common\Views\Shared\" />
     <Folder Include="Areas\Common\Views\Upload\" />
     <Folder Include="Areas\Member\Models\" />

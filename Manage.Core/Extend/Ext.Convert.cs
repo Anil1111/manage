@@ -16,6 +16,19 @@ namespace Manage.Core.Extend
         {
             return data == null ? string.Empty : data.ToString().Trim();
         }
+
+        /// <summary>
+        /// 转换为数字
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static int ToInt(this string text)
+        {
+            if (string.IsNullOrEmpty(text)) return 0;
+            int outResult;
+            Int32.TryParse(text.Trim(), out outResult);
+            return outResult;
+        }
         #endregion
 
         #region 转换为16进制

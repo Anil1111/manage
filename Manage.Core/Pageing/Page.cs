@@ -9,5 +9,7 @@ namespace Manage.Core.Pageing
         public Page() { }
 
         public List<T> ResultList { get; set; }
+
+        public int HidSelectPage { get; set; }
     }
 }
