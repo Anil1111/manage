@@ -29,6 +29,33 @@ namespace Manage.Core.Extend
             Int32.TryParse(text.Trim(), out outResult);
             return outResult;
         }
+
+        /// <summary>
+        /// 转换为日期
+        /// </summary>
+        /// <param name="data">数据</param>
+        public static DateTime ToDate(this object data)
+        {
+            if (data == null)
+                return DateTime.MinValue;
+            DateTime result;
+            return DateTime.TryParse(data.ToString(), out result) ? result : DateTime.MinValue;
+        }
+
+        /// <summary>
+        /// 转换为可空日期
+        /// </summary>
+        /// <param name="data">数据</param>
+        public static DateTime? ToDateOrNull(this object data)
+        {
+            if (data == null)
+                return null;
+            DateTime result;
+            bool isValid = DateTime.TryParse(data.ToString(), out result);
+            if (isValid)
+                return result;
+            return null;
+        }
         #endregion
 
         #region 转换为16进制

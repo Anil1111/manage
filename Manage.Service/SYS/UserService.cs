@@ -54,7 +54,7 @@ namespace Manage.Service
             }
             if (!string.IsNullOrEmpty(form.EndDate))
             {
-                DateTime dt = DateTime.Parse(form.EndDate);
+                DateTime dt = Ext.ToDate(form.EndDate);
                 predicate = predicate.And(s => s.UpdateDate <= dt);
             }
             if (!string.IsNullOrEmpty(form.SelectUserNameKey))
