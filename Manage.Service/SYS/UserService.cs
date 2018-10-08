@@ -97,6 +97,12 @@ namespace Manage.Service
             //var result = ContextDB.managerDBContext.Database.ExecuteSqlCommand("exec proc_userInsert @UserName, @Ret out", parameters);
             //int ret = (int)parameters[1].Value;
 
+            //            SqlParameter[] p =
+            //{
+            //                SqlHelper.MakeInParam("@UserId",SqlDbType.VarChar,20,UserId),
+            //                SqlHelper.MakeInParam("@Pwd",SqlDbType.VarChar,50,Pwd)
+            //            };
+
             Sys_User model = new Sys_User();
             Ext.CopyFrom(model, form);
             model.UpdateDate = DateTime.Now;
